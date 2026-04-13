@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Song Architect Services — Production, writing, mixing and mastering for independent artists. Two clear paths from idea to release.">
+  <title>Services — Song Architect</title>
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .path-hero{padding:200px 24px 80px;text-align:center;position:relative;overflow:hidden;}
+    .path-hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(99,102,241,.18),transparent 60%),linear-gradient(to bottom,rgba(7,7,15,.4),rgba(7,7,15,1));}
+    .path-hero .mesh-blob{opacity:.2;}
+    .path-detail{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+    @media(max-width:768px){.path-detail{grid-template-columns:1fr;}}
+    .path-block{border-radius:var(--r-xl);border:1px solid var(--border);background:var(--surface);padding:48px 40px;position:relative;overflow:hidden;}
+    @media(max-width:540px){.path-block{padding:32px 24px;}}
+    .path-block.highlight{border-color:rgba(16,185,129,.3);background:linear-gradient(145deg,rgba(16,185,129,.05),var(--surface) 60%);}
+    .path-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+    .path-block.pa::before{background:linear-gradient(90deg,var(--primary),transparent);}
+    .path-block.pb::before{background:linear-gradient(90deg,var(--cta),transparent);}
+    .path-num{font-family:'JetBrains Mono',monospace;font-size:4rem;font-weight:700;opacity:.06;position:absolute;top:16px;right:24px;line-height:1;}
+    .include-list{display:flex;flex-direction:column;gap:14px;margin:24px 0 32px;}
+    .include-item{display:flex;gap:14px;align-items:flex-start;}
+    .inc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .pa .inc-icon{background:var(--primary-dim);}
+    .pb .inc-icon{background:var(--cta-dim);}
+    .inc-icon svg{width:16px;height:16px;}
+    .pa .inc-icon svg{stroke:var(--primary-light);}
+    .pb .inc-icon svg{stroke:#34D399;}
+    .inc-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;margin-bottom:2px;}
+    .inc-desc{font-size:.78rem;color:var(--text-3);line-height:1.55;}
+    .divider-v{height:1px;background:var(--border);margin:28px 0;}
+    .price-note{font-size:.78rem;color:var(--text-3);line-height:1.6;padding:16px;border-radius:var(--r-md);background:rgba(255,255,255,.03);border:1px solid var(--border);}
+    .compare-table{width:100%;border-collapse:collapse;margin-top:40px;}
+    .compare-table th,.compare-table td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--border);font-size:.875rem;}
+    .compare-table th{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.8rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;}
+    .compare-table td:first-child{color:var(--text-2);}
+    .compare-table tr:last-child td{border-bottom:none;}
+    .check-cell{color:var(--cta);font-size:1.1rem;}
+    .dash-cell{color:var(--text-3);}
+    .faq-list{display:flex;flex-direction:column;gap:12px;margin-top:40px;}
+    .faq-item{border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface);overflow:hidden;}
+    .faq-q{padding:20px 24px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.925rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+    .faq-q:hover{background:rgba(255,255,255,.02);}
+    .faq-q svg{width:16px;height:16px;flex-shrink:0;transition:transform 300ms var(--ease-spring);}
+    .faq-item.open .faq-q svg{transform:rotate(45deg);}
+    .faq-a{padding:0 24px;max-height:0;overflow:hidden;transition:max-height 400ms var(--ease-spring),padding 300ms;}
+    .faq-item.open .faq-a{max-height:300px;padding:0 24px 20px;}
+    .faq-a p{font-size:.875rem;color:var(--text-2);line-height:1.7;}
+  </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div id="progress-bar"></div>
+<nav aria-label="Main navigation">
+  <a class="nav-brand" href="index.html"><div class="nav-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6l4 2.5M8 8L4 10.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>Song Architect</a>
+  <ul class="nav-links" role="list"><li><a href="services.html">Services</a></li><li><a href="process.html">Process</a></li><li><a href="work.html">Work</a></li><li><a href="artists.html">Artists</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <button class="nav-cta" onclick="openModal()">Start Your Song</button>
+</nav>
+
+<main id="main">
+<section class="path-hero">
+  <div class="path-hero-overlay" aria-hidden="true"></div>
+  <div class="mesh-blob blob-1" style="position:absolute;" aria-hidden="true"></div>
+  <div class="mesh-blob blob-2" style="position:absolute;" aria-hidden="true"></div>
+  <div style="position:relative;z-index:2;max-width:680px;margin:0 auto;">
+    <div class="eyebrow reveal">Services</div>
+    <h1 style="font-size:clamp(2.4rem,5vw,4rem);margin-bottom:20px;" class="reveal rd1">Two paths.<br><span class="gradient-text">One destination.</span></h1>
+    <p style="font-size:1rem;color:var(--text-2);line-height:1.7;max-width:500px;margin:0 auto;" class="reveal rd2">Whether you have a rough demo or just a concept, we take it to a professionally released track. Choose the path that fits where you are.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="services-h">
+  <div class="container">
+    <div class="path-detail">
+      <div class="path-block pa card-tilt reveal">
+        <span class="path-num" aria-hidden="true">A</span>
+        <div class="chip chip-indigo" style="margin-bottom:20px;"><div class="chip-dot"></div>Path A</div>
+        <h2 style="font-size:1.6rem;margin-bottom:8px;" id="services-h">Production + Mix + Master</h2>
+        <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:8px;"><strong style="color:var(--text);">Best for:</strong> You have a song — lyrics, melody, maybe a demo — but it doesn't sound professional yet.</p>
+        <div class="include-list">
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Full Production</div><p class="inc-desc">Drums, bass, melodic elements, arrangement — we build a complete backing track around your idea.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="6" width="10" height="6" rx="1.5" stroke-width="1.5"/><path d="M6 6V4a2 2 0 0 1 4 0v2" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Professional Mixing</div><p class="inc-desc">Every element balanced and processed to sound cohesive, wide, and polished.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Mastering</div><p class="inc-desc">Loudness, EQ, limiting — optimised for Spotify, Apple Music, YouTube, and everywhere else.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-8" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Unlimited Revisions</div><p class="inc-desc">We revise until the song feels exactly right to you. No revision cap, no extra fees.</p></div></div>
+        </div>
+        <div class="divider-v"></div>
+        <div class="price-note">Starting from a discussion on your project. We quote after hearing your demo — no hidden fees, no surprises.</div>
+        <div style="margin-top:24px;"><button class="btn-primary" onclick="openModal()">Start with Path A →</button></div>
+      </div>
+      <div class="path-block pb highlight card-tilt reveal rd2">
+        <span class="path-num" aria-hidden="true">B</span>
+        <div class="chip chip-green" style="margin-bottom:20px;"><div class="chip-dot"></div>Path B — Most Popular</div>
+        <h2 style="font-size:1.6rem;margin-bottom:8px;">Writing + Production + Mix + Master</h2>
+        <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:8px;"><strong style="color:var(--text);">Best for:</strong> You have a concept, a hook, or a half-finished idea — but you need help shaping it into a complete song.</p>
+        <div class="include-list">
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12V8l4-6 4 6v4M6 12v-3h4v3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="inc-title">Co-Writing</div><p class="inc-desc">We shape your concept into a full song — lyrics, melody, structure — while protecting your core idea.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Full Production</div><p class="inc-desc">Complete backing track built around the song we craft together.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="6" width="10" height="6" rx="1.5" stroke-width="1.5"/><path d="M6 6V4a2 2 0 0 1 4 0v2" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Professional Mixing</div><p class="inc-desc">Full mix ensuring every element sits perfectly in the soundscape.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Mastering</div><p class="inc-desc">Platform-optimised master, ready to distribute anywhere immediately.</p></div></div>
+        </div>
+        <div class="divider-v"></div>
+        <div class="price-note">We build around your idea — you keep 100% creative ownership and all rights to your song.</div>
+        <div style="margin-top:24px;"><button class="btn-cta" onclick="openModal()">Start with Path B →</button></div>
+      </div>
+    </div>
+
+    <!-- Comparison -->
+    <h3 style="font-size:1.5rem;margin:72px 0 0;text-align:center;" class="reveal">Side-by-side comparison</h3>
+    <div class="divider" style="margin:24px 0 0;"></div>
+    <table class="compare-table reveal rd1" aria-label="Services comparison">
+      <thead><tr><th>What's included</th><th>Path A — Production</th><th>Path B — Full Service</th></tr></thead>
+      <tbody>
+        <tr><td>Co-writing &amp; song development</td><td class="dash-cell">—</td><td class="check-cell">✓</td></tr>
+        <tr><td>Full production from scratch</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Professional mixing</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Mastering (all platforms)</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Unlimited revisions</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>100% artist ownership</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Release-ready delivery files</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>48-hour first draft</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section section-dark" aria-labelledby="faq-h">
+  <div class="container-sm">
+    <div class="eyebrow reveal">FAQ</div>
+    <h2 class="section-heading reveal rd1" id="faq-h">Common questions</h2>
+    <div class="faq-list reveal rd2">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">What do I need to send to get started?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>Anything — a voice note, a rough demo, lyrics in a doc, or even just a description of what you're going for. We work from wherever you are.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">How do revisions work?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>There's no revision cap. You give feedback, we revise. We keep going until the song feels exactly right to you — that's the whole point.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">Do I own my song?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>Yes, 100%. You retain full creative and commercial ownership. We don't take publishing cuts or royalty shares. It's your song.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">How long does the full process take?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>You'll have a first draft within 48 hours. The full process — including revisions and mastering — typically takes 7–14 days depending on the number of revision rounds.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">What formats do I get at the end?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>WAV (24-bit master), MP3 (320kbps), and any streaming-specific formats you need. Everything you need to distribute immediately.</p></div></div>
+    </div>
+    <div style="margin-top:48px;text-align:center;"><button class="btn-cta" onclick="openModal()" style="font-size:1.05rem;padding:16px 40px;">Start Your Song →</button></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="footer-inner"><a class="footer-brand" href="index.html"><div class="nav-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6l4 2.5M8 8L4 10.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>Song Architect</a><nav aria-label="Footer navigation"><ul class="footer-links" role="list"><li><a href="services.html">Services</a></li><li><a href="process.html">Process</a></li><li><a href="work.html">Work</a></li><li><a href="artists.html">Artists</a></li><li><a href="contact.html">Contact</a></li></ul></nav><p class="footer-copy">© 2025 Song Architect.</p></div></footer>
+
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()" aria-hidden="true"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-h" aria-hidden="true">
+  <button class="modal-close" onclick="closeModal()" aria-label="Close"><svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+  <h3 id="m-h">Start Your Song</h3><p>Tell us where you're at.</p>
+  <form onsubmit="handleSubmit(event)" novalidate>
+    <div class="form-group"><div class="form-label" id="pl">Starting point <abbr title="required" aria-hidden="true">*</abbr></div><div class="path-options" role="group" aria-labelledby="pl"><div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'demo')" onkeydown="if(event.key==='Enter')selectPath(this,'demo')" aria-pressed="false"><div class="path-option-icon">🎧</div><div class="path-option-label">I have a demo</div></div><div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'idea')" onkeydown="if(event.key==='Enter')selectPath(this,'idea')" aria-pressed="false"><div class="path-option-icon">✍️</div><div class="path-option-label">I need help writing</div></div></div></div>
+    <div class="form-group"><label class="form-label" for="fn">Name <abbr title="required" aria-hidden="true">*</abbr></label><input class="form-input" id="fn" type="text" placeholder="Your name" autocomplete="given-name" required></div>
+    <div class="form-group"><label class="form-label" for="fe">Email <abbr title="required" aria-hidden="true">*</abbr></label><input class="form-input" id="fe" type="email" placeholder="you@example.com" autocomplete="email" required></div>
+    <div class="form-group"><label class="form-label" for="fs">About your song</label><input class="form-input" id="fs" type="text" placeholder="Genre, vibe, describe the feeling…"></div>
+    <button type="submit" class="form-submit">Send it →</button>
+  </form>
+</div>
+
+<script src="global.js"></script>
+<script>
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-q').setAttribute('aria-expanded','false');});
+  if(!isOpen){item.classList.add('open');el.setAttribute('aria-expanded','true');}
+}
+</script>
+</body></html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Song Architect Process — How we turn your idea into a release-ready track in four clear steps.">
+  <title>Process — Song Architect</title>
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .process-timeline{display:flex;flex-direction:column;gap:0;margin-top:64px;}
+    .timeline-step{display:grid;grid-template-columns:80px 1fr;gap:32px;position:relative;padding-bottom:56px;}
+    @media(max-width:600px){.timeline-step{grid-template-columns:56px 1fr;gap:20px;padding-bottom:40px;}}
+    .timeline-step:last-child{padding-bottom:0;}
+    .tl-left{display:flex;flex-direction:column;align-items:center;gap:0;}
+    .tl-circle{width:56px;height:56px;border-radius:50%;border:1px solid var(--border);background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--primary-light);font-weight:700;flex-shrink:0;transition:background 300ms,border-color 300ms,box-shadow 300ms;z-index:1;}
+    .timeline-step:hover .tl-circle{background:var(--primary-dim);border-color:var(--primary);box-shadow:0 0 20px var(--primary-glow);}
+    @media(max-width:600px){.tl-circle{width:44px;height:44px;font-size:.72rem;}}
+    .tl-line{flex:1;width:1px;background:linear-gradient(to bottom,var(--primary),rgba(99,102,241,.1));margin-top:8px;min-height:40px;}
+    .timeline-step:last-child .tl-line{display:none;}
+    .tl-content{padding-top:12px;}
+    .tl-tag{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px;}
+    .tl-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;margin-bottom:12px;}
+    .tl-desc{font-size:.9rem;color:var(--text-2);line-height:1.7;margin-bottom:16px;}
+    .tl-sub{display:flex;flex-direction:column;gap:8px;}
+    .tl-sub-item{display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:var(--text-3);}
+    .tl-sub-item::before{content:'→';color:var(--primary-light);flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+    .console-break{position:relative;overflow:hidden;height:380px;margin:0;}
+    .console-break img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(.7) saturate(1.2);}
+    .console-break-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,7,15,.9) 0%,rgba(7,7,15,.1) 40%,rgba(7,7,15,.1) 60%,rgba(7,7,15,.9) 100%),linear-gradient(90deg,rgba(99,102,241,.1),transparent 60%);}
+    .console-break-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column;gap:12px;}
+    .timeline-block{border-radius:var(--r-lg);border:1px solid var(--border);background:var(--surface-2);padding:20px 24px;margin-top:16px;}
+    .timeline-block h4{font-size:.875rem;font-weight:600;margin-bottom:6px;}
+    .timeline-block p{font-size:.8rem;color:var(--text-3);line-height:1.6;}
+  </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div id="progress-bar"></div>
+<nav aria-label="Main navigation">
+  <a class="nav-brand" href="index.html"><div class="nav-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6l4 2.5M8 8L4 10.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>Song Architect</a>
+  <ul class="nav-links" role="list"><li><a href="services.html">Services</a></li><li><a href="process.html">Process</a></li><li><a href="work.html">Work</a></li><li><a href="artists.html">Artists</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <button class="nav-cta" onclick="openModal()">Start Your Song</button>
+</nav>
+
+<main id="main">
+<section style="position:relative;padding:180px 24px 80px;text-align:center;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(16,185,129,.15),transparent 60%),linear-gradient(to bottom,rgba(7,7,15,.4),rgba(7,7,15,1));" aria-hidden="true"></div>
+  <div class="mesh-blob blob-2" style="position:absolute;" aria-hidden="true"></div>
+  <div style="position:relative;z-index:2;max-width:680px;margin:0 auto;">
+    <div class="eyebrow reveal">The process</div>
+    <h1 style="font-size:clamp(2.4rem,5vw,4rem);margin-bottom:20px;" class="reveal rd1">Four steps.<br><span class="gradient-text">One finished song.</span></h1>
+    <p style="font-size:1rem;color:var(--text-2);line-height:1.7;max-width:480px;margin:0 auto;" class="reveal rd2">No jargon. No confusing back-and-forth. Just your idea, and then a track you're proud to release.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="proc-h">
+  <div class="container-sm">
+    <div class="process-timeline" aria-label="Production process steps">
+      <div class="timeline-step reveal">
+        <div class="tl-left"><div class="tl-circle" aria-hidden="true">01</div><div class="tl-line" aria-hidden="true"></div></div>
+        <div class="tl-content">
+          <div class="tl-tag">Step one</div>
+          <div class="tl-title">Send your starting point</div>
+          <p class="tl-desc">Whatever you have — send it. There's genuinely no wrong format. We've worked from all of these:</p>
+          <div class="tl-sub">
+            <div class="tl-sub-item">A voice note on your phone (even 10 seconds is fine)</div>
+            <div class="tl-sub-item">A GarageBand or Logic rough demo</div>
+            <div class="tl-sub-item">Lyrics in a Google Doc with a description</div>
+            <div class="tl-sub-item">A reference track and a description of the vibe</div>
+            <div class="tl-sub-item">Just a concept or a feeling in words</div>
+          </div>
+          <div class="timeline-block" style="margin-top:20px;">
+            <h4>What happens next</h4>
+            <p>We listen, ask a few targeted questions (genre, mood, references), then get to work. Usually within a few hours of receiving your material.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal rd1">
+        <div class="tl-left"><div class="tl-circle" aria-hidden="true">02</div><div class="tl-line" aria-hidden="true"></div></div>
+        <div class="tl-content">
+          <div class="tl-tag">Step two · within 48 hours</div>
+          <div class="tl-title">First draft lands in your inbox</div>
+          <p class="tl-desc">Within 48 hours you'll hear a fully produced version of your track. Not a rough sketch — a real, produced draft with:</p>
+          <div class="tl-sub">
+            <div class="tl-sub-item">Full arrangement (drums, bass, melodic elements)</div>
+            <div class="tl-sub-item">Your vocal/melody sitting in the mix</div>
+            <div class="tl-sub-item">A reference mix to judge tone and direction</div>
+            <div class="tl-sub-item">Notes on our creative decisions so you understand the choices</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal rd2">
+        <div class="tl-left"><div class="tl-circle" aria-hidden="true">03</div><div class="tl-line" aria-hidden="true"></div></div>
+        <div class="tl-content">
+          <div class="tl-tag">Step three · ongoing</div>
+          <div class="tl-title">Refine together — unlimited rounds</div>
+          <p class="tl-desc">You give feedback. We revise. We keep going until the song feels exactly right to you. There is no revision cap.</p>
+          <div class="tl-sub">
+            <div class="tl-sub-item">Change the arrangement, energy, instruments</div>
+            <div class="tl-sub-item">Adjust the mix balance or tonal character</div>
+            <div class="tl-sub-item">Rewrite sections if the direction shifts</div>
+            <div class="tl-sub-item">Try multiple versions of a chorus or bridge</div>
+          </div>
+          <div class="timeline-block" style="margin-top:20px;">
+            <h4>How most projects go</h4>
+            <p>Most artists need 2–4 revision rounds. Some need 1. Some need 8. We've never had a project go over because of "too many changes."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal rd3">
+        <div class="tl-left"><div class="tl-circle" aria-hidden="true">04</div><div class="tl-line" aria-hidden="true"></div></div>
+        <div class="tl-content">
+          <div class="tl-tag">Step four · final delivery</div>
+          <div class="tl-title">Release-ready files, delivered</div>
+          <p class="tl-desc">Once you're happy, we deliver the full mastered package. Everything you need to publish your track anywhere, immediately.</p>
+          <div class="tl-sub">
+            <div class="tl-sub-item">WAV 24-bit master (for distribution)</div>
+            <div class="tl-sub-item">MP3 320kbps (for sharing/streaming)</div>
+            <div class="tl-sub-item">Stems if requested (separate instrument tracks)</div>
+            <div class="tl-sub-item">Loudness-normalised for Spotify, Apple Music, YouTube</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="console-break" aria-hidden="true">
+  <img src="./assets/console.jpg" alt="" role="presentation" loading="lazy">
+  <div class="console-break-overlay"></div>
+  <div class="console-break-text">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(129,140,248,.9);">The craft behind the sound</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,3.5vw,2.6rem);font-weight:700;color:#F1F5F9;letter-spacing:-.02em;">Every fader. Every decision.<br><span style="background:linear-gradient(135deg,#A78BFA,#10B981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Made for your song.</span></div>
+  </div>
+</div>
+
+<section class="section section-dark" aria-labelledby="timeline-h">
+  <div class="container-sm">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="eyebrow reveal">Timeline</div>
+      <h2 class="section-heading reveal rd1" id="timeline-h">What to expect, week by week</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;" class="reveal rd1">
+      <div style="border-radius:var(--r-lg);border:1px solid var(--border);background:var(--surface-2);padding:28px 24px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--primary-light);margin-bottom:12px;letter-spacing:.08em;">DAY 1–2</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px;">First draft</div>
+        <p style="font-size:.8rem;color:var(--text-3);line-height:1.6;">You send your starting point. We produce a full first draft and send it back.</p>
+      </div>
+      <div style="border-radius:var(--r-lg);border:1px solid rgba(99,102,241,.25);background:linear-gradient(145deg,rgba(99,102,241,.06),var(--surface-2) 60%);padding:28px 24px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--primary-light);margin-bottom:12px;letter-spacing:.08em;">DAY 3–10</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px;">Revision rounds</div>
+        <p style="font-size:.8rem;color:var(--text-3);line-height:1.6;">Back and forth until the track sounds exactly how you want it.</p>
+      </div>
+      <div style="border-radius:var(--r-lg);border:1px solid rgba(16,185,129,.2);background:linear-gradient(145deg,rgba(16,185,129,.06),var(--surface-2) 60%);padding:28px 24px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#34D399;margin-bottom:12px;letter-spacing:.08em;">DAY 10–14</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;margin-bottom:8px;">Final delivery</div>
+        <p style="font-size:.8rem;color:var(--text-3);line-height:1.6;">Mastered files delivered. Ready to upload to Spotify and every other platform.</p>
+      </div>
+    </div>
+    <div style="margin-top:48px;text-align:center;"><button class="btn-cta" onclick="openModal()" style="font-size:1.05rem;padding:16px 40px;">Start the process →</button></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="footer-inner"><a class="footer-brand" href="index.html"><div class="nav-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6l4 2.5M8 8L4 10.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>Song Architect</a><nav aria-label="Footer navigation"><ul class="footer-links" role="list"><li><a href="services.html">Services</a></li><li><a href="process.html">Process</a></li><li><a href="work.html">Work</a></li><li><a href="artists.html">Artists</a></li><li><a href="contact.html">Contact</a></li></ul></nav><p class="footer-copy">© 2025 Song Architect.</p></div></footer>
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()" aria-hidden="true"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-h" aria-hidden="true"><button class="modal-close" onclick="closeModal()" aria-label="Close"><svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><h3 id="m-h">Start Your Song</h3><p>Tell us where you're at.</p><form onsubmit="handleSubmit(event)" novalidate><div class="form-group"><div class="form-label" id="pl">Starting point</div><div class="path-options" role="group" aria-labelledby="pl"><div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'demo')" onkeydown="if(event.key==='Enter')selectPath(this,'demo')" aria-pressed="false"><div class="path-option-icon">🎧</div><div class="path-option-label">I have a demo</div></div><div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'idea')" onkeydown="if(event.key==='Enter')selectPath(this,'idea')" aria-pressed="false"><div class="path-option-icon">✍️</div><div class="path-option-label">I need help writing</div></div></div></div><div class="form-group"><label class="form-label" for="fn">Name</label><input class="form-input" id="fn" type="text" placeholder="Your name" autocomplete="given-name" required></div><div class="form-group"><label class="form-label" for="fe">Email</label><input class="form-input" id="fe" type="email" placeholder="you@example.com" autocomplete="email" required></div><div class="form-group"><label class="form-label" for="fs">About your song</label><input class="form-input" id="fs" type="text" placeholder="Genre, vibe, describe the feeling…"></div><button type="submit" class="form-submit">Send it →</button></form></div>
+<script src="global.js"></script>
+</body></html>

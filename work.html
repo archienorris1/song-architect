@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Song Architect Work — Listen to tracks produced, mixed and mastered for independent artists. Every song started as a rough idea.">
+  <title>Work — Song Architect</title>
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .wf-hero{position:relative;overflow:hidden;height:480px;}
+    .wf-hero img{width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(1.3);}
+    .wf-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,7,15,.9),rgba(7,7,15,.15) 40%,rgba(7,7,15,.15) 60%,rgba(7,7,15,.9));}
+    .wf-hero-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;}
+    .track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    @media(max-width:768px){.track-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.track-grid{grid-template-columns:1fr;}}
+    .track-card{border-radius:var(--r-xl);padding:28px;border:1px solid var(--border);background:var(--surface);position:relative;overflow:hidden;transition:transform var(--dur-slow) var(--ease-spring),box-shadow var(--dur-slow),border-color var(--dur-slow);}
+    .track-card:hover{transform:translateY(-5px) scale(1.01);box-shadow:var(--shadow-xl);border-color:var(--border-2);}
+    .track-card:nth-child(1){--cc:var(--primary);--cg:var(--primary-glow);}
+    .track-card:nth-child(2){--cc:var(--cta);--cg:var(--cta-glow);}
+    .track-card:nth-child(3){--cc:var(--accent);--cg:rgba(245,158,11,.35);}
+    .track-card:nth-child(4){--cc:#EC4899;--cg:rgba(236,72,153,.35);}
+    .track-card:nth-child(5){--cc:#06B6D4;--cg:rgba(6,182,212,.35);}
+    .track-card:nth-child(6){--cc:#8B5CF6;--cg:rgba(139,92,246,.35);}
+    .track-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cc),transparent);opacity:0;transition:opacity var(--dur-slow);}
+    .track-card:hover::before{opacity:1;}
+    .t-genre{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-family:'JetBrains Mono',monospace;}
+    .t-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;}
+    .wave-bars{height:44px;display:flex;align-items:center;gap:2px;margin-bottom:16px;}
+    .bar{flex:1;border-radius:3px;background:var(--cc);opacity:.3;animation:bar-idle 2s ease-in-out infinite;transition:opacity 200ms;}
+    .track-card:hover .bar{opacity:.8;animation:bar-play .5s ease-in-out infinite alternate;}
+    @keyframes bar-idle{0%,100%{transform:scaleY(1);}50%{transform:scaleY(.88);}}
+    @keyframes bar-play{from{transform:scaleY(.25);}to{transform:scaleY(1);}}
+    .bar:nth-child(1){height:35%;animation-delay:0s}.bar:nth-child(2){height:65%;animation-delay:.04s}.bar:nth-child(3){height:90%;animation-delay:.08s}.bar:nth-child(4){height:50%;animation-delay:.12s}.bar:nth-child(5){height:80%;animation-delay:.16s}.bar:nth-child(6){height:40%;animation-delay:.20s}.bar:nth-child(7){height:100%;animation-delay:.24s}.bar:nth-child(8){height:60%;animation-delay:.28s}.bar:nth-child(9){height:75%;animation-delay:.32s}.bar:nth-child(10){height:45%;animation-delay:.36s}.bar:nth-child(11){height:85%;animation-delay:.40s}.bar:nth-child(12){height:55%;animation-delay:.44s}.bar:nth-child(13){height:70%;animation-delay:.48s}.bar:nth-child(14){height:35%;animation-delay:.52s}.bar:nth-child(15){height:90%;animation-delay:.56s}.bar:nth-child(16){height:50%;animation-delay:.60s}.bar:nth-child(17){height:65%;animation-delay:.64s}.bar:nth-child(18){height:45%;animation-delay:.68s}.bar:nth-child(19){height:80%;animation-delay:.72s}.bar:nth-child(20){height:30%;animation-delay:.76s}
+    .t-footer{display:flex;align-items:center;justify-content:space-between;}
+    .play-btn{width:40px;height:40px;border-radius:50%;background:var(--cc);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 200ms var(--ease-spring),box-shadow 200ms;box-shadow:0 0 16px var(--cg);}
+    .play-btn:hover{transform:scale(1.12);box-shadow:0 0 28px var(--cg);}
+    .play-btn:focus-visible{outline:3px solid var(--cc);outline-offset:3px;}
+    .play-btn svg{width:14px;height:14px;fill:#fff;margin-left:2px;}
+    .t-tag{font-size:.68rem;padding:4px 10px;border-radius:9999px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text-3);}
+    .genre-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
+    .filter-btn{padding:8px 18px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--text-3);font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;transition:border-color 200ms,color 200ms,background 200ms;}
+    .filter-btn:hover,.filter-btn.active{border-color:var(--primary);background:var(--primary-dim);color:var(--primary-light);}
+    .filter-btn:focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
+  </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div id="progress-bar"></div>
+<nav aria-label="Main navigation">
+  <a class="nav-brand" href="index.html"><div class="nav-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6l4 2.5M8 8L4 10.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>Song Architect</a>
+  <ul class="nav-links" role="list"><li><a href="services.html">Services</a></li><li><a href="process.html">Process</a></li><li><a href="work.html">Work</a></li><li><a href="artists.html">Artists</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <button class="nav-cta" onclick="openModal()">Start Your Song</button>
+</nav>
+
+<main id="main">
+<div class="wf-hero">
+  <img src="./assets/waveform.jpg" alt="Abstract music waveform visualization in indigo and emerald" loading="eager" width="1400" height="480">
+  <div class="wf-hero-overlay" aria-hidden="true"></div>
+  <div class="wf-hero-content">
+    <div class="eyebrow reveal" style="color:rgba(129,140,248,.9);">The work</div>
+    <h1 style="font-size:clamp(2.4rem,5vw,4rem);margin-bottom:16px;" class="reveal rd1">Sounds we've shaped</h1>
+    <p style="font-size:1rem;color:var(--text-2);max-width:480px;" class="reveal rd2">Every track started as a voice note, a rough demo, or an unfinished idea.</p>
+  </div>
+</div>
+
+<section class="section" aria-labelledby="work-h">
+  <div class="container">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:40px;">
+      <div>
+        <div class="eyebrow reveal">Portfolio</div>
+        <h2 class="section-heading reveal rd1" id="work-h" style="margin-bottom:0;">200+ tracks produced</h2>
+      </div>
+      <div class="genre-filters reveal rd2" role="group" aria-label="Filter by genre">
+        <button class="filter-btn active" onclick="filterTracks(this,'all')" type="button">All</button>
+        <button class="filter-btn" onclick="filterTracks(this,'r&b')" type="button">R&amp;B</button>
+        <button class="filter-btn" onclick="filterTracks(this,'pop')" type="button">Pop</button>
+        <button class="filter-btn" onclick="filterTracks(this,'alt')" type="button">Alternative</button>
+        <button class="filter-btn" onclick="filterTracks(this,'hip-hop')" type="button">Hip-Hop</button>
+        <button class="filter-btn" onclick="filterTracks(this,'indie')" type="button">Indie</button>
+      </div>
+    </div>
+
+    <div class="track-grid" id="track-grid">
+      <div class="track-card reveal" data-genre="r&b"><div class="t-genre">R&amp;B · Writing + Production</div><div class="t-name">Late Nights</div><div class="wave-bars" aria-hidden="true"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><div class="t-footer"><button class="play-btn" aria-label="Play Late Nights"><svg viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13"/></svg></button><span class="t-tag">Voice note → track</span></div></div>
+      <div class="track-card reveal rd1" data-genre="pop"><div class="t-genre">Pop · Production + Mix</div><div class="t-name">Break the Frame</div><div class="wave-bars" aria-hidden="true"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><div class="t-footer"><button class="play-btn" aria-label="Play Break the Frame"><svg viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13"/></svg></button><span class="t-tag">Rough demo → release</span></div></div>
+      <div class="track-card reveal rd2" data-genre="alt"><div class="t-genre">Alternative · Full Service</div><div class="t-name">Spiral Down</div><div class="wave-bars" aria-hidden="true"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><div class="t-footer"><button class="play-btn" aria-label="Play Spiral Down"><svg viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13"/></svg></button><span class="t-tag">Lyrics → full track</span></div></div>
+      <div class="track-card reveal rd3" data-genre="hip-hop"><div class="t-genre">Hip-Hop · Production</div><div class="t-name">Still Standing</div><div class="wave-bars" aria-hidden="true"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><div class="t-footer"><button class="play-btn" aria-label="Play Still Standing"><svg viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13"/></svg></button><span class="t-tag">Beat + vocals</span></div></div>
+      <div class="track-card reveal" data-genre="indie"><div class="t-genre">Indie Pop · Full Service</div><div class="t-name">Gold Rush</div><div class="wave-bars" aria-hidden="true"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><div class="t-footer"><button class="play-btn" aria-label="Play Gold Rush"><svg viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13"/></svg></button><span class="t-tag">Concept → single</span></div></div>
+      <div class="track-card reveal rd1" data-genre="r&b"><div class="t-genre">R&amp;B Soul · Mix + Master</div><div class="t-name">4AM</div><div class="wave-bars" aria-hidden="true"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><div class="t-footer"><button class="play-btn" aria-label="Play 4AM"><svg viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13"/></svg></button><span class="t-tag">Demo → Spotify</span></div></div>
+    </div>
+
+    <div style="margin-top:56px;padding:40px;border-radius:var(--r-xl);border:1px solid var(--border);background:var(--surface);text-align:center;" class="reveal">
+      <div class="eyebrow" style="margin-bottom:12px;">Your track next?</div>
+      <h3 style="font-size:1.5rem;margin-bottom:12px;">Ready to hear what we'd do with your song?</h3>
+      <p style="font-size:.9rem;color:var(--text-2);max-width:440px;margin:0 auto 28px;">Send us your idea — voice note, demo, or just a description — and we'll have a first draft back within 48 hours.</p>
+      <button class="btn-cta" onclick="openModal()"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><polygon points="4,2 14,8 4,14" fill="white"/></svg>Start Your Song</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="footer-inner"><a class="footer-brand" href="index.html"><div class="nav-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6l4 2.5M8 8L4 10.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>Song Architect</a><nav aria-label="Footer navigation"><ul class="footer-links" role="list"><li><a href="services.html">Services</a></li><li><a href="process.html">Process</a></li><li><a href="work.html">Work</a></li><li><a href="artists.html">Artists</a></li><li><a href="contact.html">Contact</a></li></ul></nav><p class="footer-copy">© 2025 Song Architect.</p></div></footer>
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()" aria-hidden="true"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-h" aria-hidden="true"><button class="modal-close" onclick="closeModal()" aria-label="Close"><svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><h3 id="m-h">Start Your Song</h3><p>Tell us where you're at.</p><form onsubmit="handleSubmit(event)" novalidate><div class="form-group"><div class="form-label" id="pl">Starting point</div><div class="path-options" role="group" aria-labelledby="pl"><div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'demo')" onkeydown="if(event.key==='Enter')selectPath(this,'demo')" aria-pressed="false"><div class="path-option-icon">🎧</div><div class="path-option-label">I have a demo</div></div><div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'idea')" onkeydown="if(event.key==='Enter')selectPath(this,'idea')" aria-pressed="false"><div class="path-option-icon">✍️</div><div class="path-option-label">I need help writing</div></div></div></div><div class="form-group"><label class="form-label" for="fn">Name</label><input class="form-input" id="fn" type="text" placeholder="Your name" autocomplete="given-name" required></div><div class="form-group"><label class="form-label" for="fe">Email</label><input class="form-input" id="fe" type="email" placeholder="you@example.com" autocomplete="email" required></div><div class="form-group"><label class="form-label" for="fs">About your song</label><input class="form-input" id="fs" type="text" placeholder="Genre, vibe, describe the feeling…"></div><button type="submit" class="form-submit">Send it →</button></form></div>
+<script src="global.js"></script>
+<script>
+function filterTracks(btn, genre) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.track-card').forEach(card=>{
+    const show = genre==='all' || card.dataset.genre===genre;
+    card.style.display = show ? '' : 'none';
+  });
+}
+</script>
+</body></html>

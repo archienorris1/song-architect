@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="Start Your Song with Song Architect — Tell us where you're starting from and we'll have a first draft back within 48 hours.">
+  <title>Start Your Song — Song Architect</title>
+  <link rel="stylesheet" href="global.css">
+  <style>
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+    @media(max-width:768px){.contact-grid{grid-template-columns:1fr;}}
+    .contact-form-wrap{border-radius:var(--r-xl);border:1px solid var(--border);background:var(--surface);padding:48px 40px;position:relative;overflow:hidden;}
+    @media(max-width:540px){.contact-form-wrap{padding:32px 24px;}}
+    .contact-form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--cta));}
+    .form-group{margin-bottom:20px;}
+    .form-label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:8px;letter-spacing:.04em;}
+    .form-label abbr{color:var(--danger);text-decoration:none;margin-left:2px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    @media(max-width:480px){.form-row{grid-template-columns:1fr;}}
+    .form-input,.form-textarea,.form-select{width:100%;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--text);outline:none;transition:border-color 200ms,box-shadow 200ms;touch-action:manipulation;}
+    .form-input::placeholder,.form-textarea::placeholder{color:var(--text-3);}
+    .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.2);}
+    .form-textarea{resize:vertical;min-height:100px;line-height:1.6;}
+    .form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;}
+    .form-select option{background:var(--surface-2);}
+    .big-submit{width:100%;padding:16px;background:var(--cta);border:none;border-radius:var(--r-md);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;color:#fff;cursor:pointer;margin-top:8px;transition:transform 200ms var(--ease-spring),box-shadow 200ms;touch-action:manipulation;}
+    .big-submit:hover{transform:scale(1.02) translateY(-2px);box-shadow:0 0 40px var(--cta-glow);}
+    .big-submit:focus-visible{outline:3px solid var(--cta);outline-offset:3px;}
+    .contact-info{display:flex;flex-direction:column;gap:20px;}
+    .info-item{padding:24px;border-radius:var(--r-lg);border:1px solid var(--border);background:var(--surface);transition:border-color 300ms,transform 300ms var(--ease-spring);}
+    .info-item:hover{border-color:var(--border-2);transform:translateX(4px);}
+    .info-label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;}
+    .info-value{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:4px;}
+    .info-note{font-size:.78rem;color:var(--text-3);line-height:1.5;}
+    .promise-list{display:flex;flex-direction:column;gap:12px;margin-top:8px;}
+    .promise-item{display:flex;align-items:flex-start;gap:12px;font-size:.85rem;color:var(--text-2);}
+    .promise-check{width:20px;height:20px;border-radius:50%;background:var(--cta-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    .promise-check svg{width:9px;height:9px;stroke:#34D399;stroke-width:2;}
+    .path-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+    .ptog{padding:14px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--surface-2);cursor:pointer;text-align:center;transition:border-color 200ms,background 200ms;touch-action:manipulation;}
+    .ptog:hover{border-color:rgba(99,102,241,.35);background:var(--primary-dim);}
+    .ptog.sel{border-color:var(--primary);background:var(--primary-dim);}
+    .ptog-icon{font-size:1.2rem;margin-bottom:4px;}
+    .ptog-label{font-size:.78rem;color:var(--text-2);}
+  </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+<div id="progress-bar"></div>
+<nav aria-label="Main navigation">
+  <a class="nav-brand" href="index.html"><div class="nav-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6l4 2.5M8 8L4 10.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>Song Architect</a>
+  <ul class="nav-links" role="list"><li><a href="services.html">Services</a></li><li><a href="process.html">Process</a></li><li><a href="work.html">Work</a></li><li><a href="artists.html">Artists</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <button class="nav-cta" onclick="openModal()">Start Your Song</button>
+</nav>
+
+<main id="main">
+<section style="position:relative;padding:180px 24px 60px;text-align:center;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(16,185,129,.15),transparent 60%),linear-gradient(to bottom,rgba(7,7,15,.4),rgba(7,7,15,1));" aria-hidden="true"></div>
+  <div class="mesh-blob blob-2" style="position:absolute;opacity:.2;" aria-hidden="true"></div>
+  <div style="position:relative;z-index:2;max-width:640px;margin:0 auto;">
+    <div class="eyebrow reveal">Get started</div>
+    <h1 style="font-size:clamp(2.4rem,5vw,4rem);margin-bottom:16px;" class="reveal rd1">Start Your Song</h1>
+    <p style="font-size:1rem;color:var(--text-2);line-height:1.7;max-width:460px;margin:0 auto;" class="reveal rd2">Tell us where you're starting from. No demo required — a description is enough. First draft back within 48 hours.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="contact-h">
+  <div class="container">
+    <h2 class="visually-hidden" id="contact-h">Contact form</h2>
+    <div class="contact-grid">
+      <div class="contact-form-wrap reveal">
+        <form id="contact-form" onsubmit="submitContact(event)" novalidate>
+          <h3 style="font-size:1.3rem;margin-bottom:6px;">Tell us about your song</h3>
+          <p style="font-size:.82rem;color:var(--text-3);margin-bottom:28px;">Fill in what you can. We'll ask anything else we need.</p>
+
+          <div class="form-group">
+            <div class="form-label" id="path-l">Where are you starting from?</div>
+            <div class="path-toggle" role="group" aria-labelledby="path-l">
+              <div class="ptog" role="button" tabindex="0" onclick="togPath(this,'demo')" onkeydown="if(event.key==='Enter')togPath(this,'demo')" aria-pressed="false">
+                <div class="ptog-icon">🎧</div><div class="ptog-label">I have a demo</div>
+              </div>
+              <div class="ptog" role="button" tabindex="0" onclick="togPath(this,'idea')" onkeydown="if(event.key==='Enter')togPath(this,'idea')" aria-pressed="false">
+                <div class="ptog-icon">✍️</div><div class="ptog-label">Just an idea</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group"><label class="form-label" for="c-name">First name <abbr title="required" aria-hidden="true">*</abbr></label><input class="form-input" id="c-name" type="text" placeholder="Archie" autocomplete="given-name" required minlength="2"></div>
+            <div class="form-group"><label class="form-label" for="c-email">Email <abbr title="required" aria-hidden="true">*</abbr></label><input class="form-input" id="c-email" type="email" placeholder="you@email.com" autocomplete="email" required></div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-genre">Genre / Style</label>
+            <select class="form-select" id="c-genre">
+              <option value="" disabled selected>Pick the closest genre…</option>
+              <option>R&amp;B / Soul</option>
+              <option>Pop</option>
+              <option>Hip-Hop / Rap</option>
+              <option>Alternative / Indie</option>
+              <option>Electronic / Dance</option>
+              <option>Singer-Songwriter</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-desc">Describe your song or idea <abbr title="required" aria-hidden="true">*</abbr></label>
+            <textarea class="form-textarea" id="c-desc" placeholder="What's the vibe? What feeling does it need to have? Any reference artists? Any lyrics you already have?" required minlength="10"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-timeline">Preferred timeline</label>
+            <select class="form-select" id="c-timeline">
+              <option value="" disabled selected>When are you hoping to have this?</option>
+              <option>ASAP (within 2 weeks)</option>
+              <option>1 month</option>
+              <option>2–3 months</option>
+              <option>No rush, just want to start</option>
+            </select>
+          </div>
+
+          <button type="submit" class="big-submit" id="c-btn">Send it →</button>
+          <p style="margin-top:12px;font-size:.72rem;color:var(--text-3);text-align:center;">We reply within a few hours. No commitment required.</p>
+        </form>
+      </div>
+
+      <div class="contact-info reveal rd2">
+        <div class="info-item">
+          <div class="info-label">Response time</div>
+          <div class="info-value">Within a few hours</div>
+          <p class="info-note">We reply to every enquiry, usually the same day. First draft is always within 48 hours of us agreeing to work together.</p>
+        </div>
+        <div class="info-item">
+          <div class="info-label">What to send</div>
+          <div class="info-value">Anything and everything</div>
+          <div class="promise-list">
+            <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke-linecap="round"/></svg></div>Voice note or voice memo</div>
+            <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke-linecap="round"/></svg></div>Rough GarageBand or Logic demo</div>
+            <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke-linecap="round"/></svg></div>Lyrics in a doc or screenshot</div>
+            <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke-linecap="round"/></svg></div>Just a concept in words</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Promises</div>
+          <div class="promise-list">
+            <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke-linecap="round"/></svg></div>First draft within 48 hours</div>
+            <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke-linecap="round"/></svg></div>Unlimited revisions, no cap</div>
+            <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke-linecap="round"/></svg></div>100% ownership stays with you</div>
+            <div class="promise-item"><div class="promise-check"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke-linecap="round"/></svg></div>No hidden fees or surprises</div>
+          </div>
+        </div>
+        <div style="border-radius:var(--r-lg);background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(16,185,129,.06));border:1px solid rgba(99,102,241,.2);padding:24px;">
+          <div class="info-label">Not sure where to start?</div>
+          <p style="font-size:.85rem;color:var(--text-2);line-height:1.65;margin-bottom:16px;">Plenty of artists fill out this form with just one sentence. "I have a sad R&amp;B song about someone leaving" is enough. We can take it from there.</p>
+          <a href="process.html" class="btn-ghost" style="font-size:.82rem;padding:10px 20px;">See how it works →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="footer-inner"><a class="footer-brand" href="index.html"><div class="nav-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6l4 2.5M8 8L4 10.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div>Song Architect</a><nav aria-label="Footer navigation"><ul class="footer-links" role="list"><li><a href="services.html">Services</a></li><li><a href="process.html">Process</a></li><li><a href="work.html">Work</a></li><li><a href="artists.html">Artists</a></li><li><a href="contact.html">Contact</a></li></ul></nav><p class="footer-copy">© 2025 Song Architect.</p></div></footer>
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()" aria-hidden="true"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-h" aria-hidden="true"><button class="modal-close" onclick="closeModal()" aria-label="Close"><svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button><h3 id="m-h">Start Your Song</h3><p>Quick version — fill in below.</p><form onsubmit="handleSubmit(event)" novalidate><div class="form-group"><div class="form-label" id="pl">Starting point</div><div class="path-options" role="group" aria-labelledby="pl"><div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'demo')" onkeydown="if(event.key==='Enter')selectPath(this,'demo')" aria-pressed="false"><div class="path-option-icon">🎧</div><div class="path-option-label">I have a demo</div></div><div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'idea')" onkeydown="if(event.key==='Enter')selectPath(this,'idea')" aria-pressed="false"><div class="path-option-icon">✍️</div><div class="path-option-label">I need help writing</div></div></div></div><div class="form-group"><label class="form-label" for="fn">Name</label><input class="form-input" id="fn" type="text" placeholder="Your name" autocomplete="given-name" required></div><div class="form-group"><label class="form-label" for="fe">Email</label><input class="form-input" id="fe" type="email" placeholder="you@example.com" autocomplete="email" required></div><div class="form-group"><label class="form-label" for="fs">About your song</label><input class="form-input" id="fs" type="text" placeholder="Genre, vibe, describe the feeling…"></div><button type="submit" class="form-submit">Send it →</button></form></div>
+<script src="global.js"></script>
+<script>
+function togPath(el,val){
+  document.querySelectorAll('.ptog').forEach(p=>{p.classList.remove('sel');p.setAttribute('aria-pressed','false');});
+  el.classList.add('sel');el.setAttribute('aria-pressed','true');
+}
+function submitContact(e){
+  e.preventDefault();
+  const btn=document.getElementById('c-btn');
+  btn.textContent="Sent! We'll be in touch ✓";
+  btn.style.background='#059669';btn.disabled=true;
+}
+</script>
+<style>.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0;}</style>
+</body></html>
