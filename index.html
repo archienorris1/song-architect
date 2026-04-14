@@ -224,6 +224,8 @@
   </style>
 </head>
 <body>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
 <a href="#main" class="skip-link">Skip to main content</a>
 <div id="progress-bar" role="progressbar" aria-label="Page reading progress"></div>
 
@@ -255,6 +257,7 @@
     <div class="mesh-blob blob-1"></div>
     <div class="mesh-blob blob-2"></div>
     <div class="mesh-blob blob-3"></div>
+    <div class="mesh-blob blob-4"></div>
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">
@@ -305,37 +308,47 @@
 <section class="section section-darker" id="paths" aria-labelledby="paths-h">
   <div class="container">
     <div style="text-align:center;margin-bottom:56px;">
-      <div class="eyebrow reveal">Which one are you?</div>
-      <h2 class="section-heading reveal rd1" id="paths-h">Two paths in. One release-ready track out.</h2>
-      <p class="section-sub reveal rd2" style="margin:0 auto">Wherever you are in your process, we meet you there.</p>
+      <div class="eyebrow reveal">Two offers. One mission.</div>
+      <h2 class="section-heading reveal rd1" id="paths-h">Finish your song. Or become<br>someone who can make them.</h2>
+      <p class="section-sub reveal rd2" style="margin:0 auto">One song done for you, or three songs built with you — while learning the process that lasts a lifetime.</p>
     </div>
     <div class="bento">
-      <div class="bento-card card-a card-tilt reveal">
+      <div class="bento-card card-a card-tilt border-beam reveal">
         <div class="bento-inner">
-          <div class="chip chip-indigo" style="margin-bottom:24px;"><div class="chip-dot"></div>Path A — Production</div>
-          <h3 style="font-size:1.5rem;margin-bottom:12px;">"I've written a song but it sounds rough"</h3>
-          <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:24px;">You have lyrics, a melody, maybe a voice note or a basic demo. The idea is there — it just doesn't sound like a real track yet.</p>
+          <div class="chip chip-indigo" style="margin-bottom:24px;"><div class="chip-dot"></div>ProSong — Done For You</div>
+          <h3 style="font-size:1.5rem;margin-bottom:12px;">Your song. Professionally built &amp; finished.</h3>
+          <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:24px;">You bring the idea — voice note, rough demo, or just a concept. We handle everything: production, mixing, mastering, and optional co-writing.</p>
           <ul class="service-list">
-            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Full production from your demo</li>
-            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Professional mixing</li>
-            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Mastering for all platforms</li>
+            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Full custom production</li>
+            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Professional mixing &amp; mastering</li>
+            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Optional co-writing support</li>
             <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Unlimited revisions</li>
           </ul>
-          <a href="services.html" class="btn-primary">I have a demo →</a>
+          <div style="margin-bottom:24px;padding:14px 18px;border-radius:var(--r-md);background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.18);display:flex;align-items:baseline;gap:10px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--primary-light);letter-spacing:.1em;text-transform:uppercase;">From</span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;">£397</span>
+            <span style="font-size:.72rem;color:var(--text-3);">per song</span>
+          </div>
+          <a href="services.html" class="btn-primary">Get ProSong →</a>
         </div>
       </div>
       <div class="bento-card card-b card-tilt reveal rd2">
         <div class="bento-inner">
-          <div class="chip chip-green" style="margin-bottom:24px;"><div class="chip-dot"></div>Path B — Full Service</div>
-          <h3 style="font-size:1.5rem;margin-bottom:12px;">"I have an idea but need help building it"</h3>
-          <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:24px;">You've got a concept, a hook, or a half-finished song. You need someone to help shape it into a full track.</p>
+          <div class="chip chip-green" style="margin-bottom:24px;"><div class="chip-dot"></div>Complete Songwriter — Done With You</div>
+          <h3 style="font-size:1.5rem;margin-bottom:12px;">Write, build &amp; release 3 songs in 90 days.</h3>
+          <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:24px;">A hands-on 3-month program. We make 3 full songs together while teaching you how to do it — so you can keep creating long after we're done.</p>
           <ul class="service-list">
-            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Co-writing around your idea</li>
-            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Full production build</li>
-            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Professional mixing</li>
-            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Mastering for all platforms</li>
+            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Weekly 60-minute sessions</li>
+            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Learn songwriting &amp; production fundamentals</li>
+            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>3 fully finished, release-ready songs</li>
+            <li class="service-item"><div class="svc-check"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke-width="1.5" stroke-linecap="round"/></svg></div>Confidence to create independently</li>
           </ul>
-          <a href="services.html" class="btn-cta">I need help writing →</a>
+          <div style="margin-bottom:24px;padding:14px 18px;border-radius:var(--r-md);background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);display:flex;align-items:baseline;gap:10px;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#34D399;letter-spacing:.1em;text-transform:uppercase;">3 Months</span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;">£1,500</span>
+            <span style="font-size:.72rem;color:var(--text-3);">· 3 songs + skills</span>
+          </div>
+          <a href="services.html" class="btn-cta">Join the Program →</a>
         </div>
       </div>
       <div class="bento-card bento-photo-card reveal rd3">
@@ -358,10 +371,60 @@
       <div class="reveal"><div class="stat-num" data-count="200" data-suffix="+">0</div><div class="stat-lbl">Songs produced</div></div>
       <div class="reveal rd1"><div class="stat-num" data-count="48" data-suffix="hr">0</div><div class="stat-lbl">First draft turnaround</div></div>
       <div class="reveal rd2"><div class="stat-num" data-count="100" data-suffix="%">0</div><div class="stat-lbl">Artist ownership</div></div>
-      <div class="reveal rd3"><div class="stat-num" data-count="50" data-suffix="k+">0</div><div class="stat-lbl">Combined streams</div></div>
+      <div class="reveal rd3"><div class="stat-num" data-count="10" data-suffix="M+">0</div><div class="stat-lbl">Combined streams</div></div>
     </div>
   </div>
 </div>
+
+<!-- FOUNDERS / CREDIBILITY -->
+<section class="section section-dark" aria-labelledby="founders-h">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="eyebrow reveal">The team</div>
+      <h2 class="section-heading reveal rd1" id="founders-h">Industry experience.<br><span class="gradient-text">Independent heart.</span></h2>
+      <p class="section-sub reveal rd2" style="margin:0 auto;">We met studying a Songwriting degree at BIMM Institute. Since then we've worked at the highest level of the industry — and chose to focus on independent artists.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+      <div class="card card-pad card-tilt reveal">
+        <div class="chip chip-indigo" style="margin-bottom:20px;"><div class="chip-dot"></div>Co-founder</div>
+        <h3 style="font-size:1.35rem;margin-bottom:6px;">Archie Norris</h3>
+        <p style="font-size:.78rem;color:var(--text-3);margin-bottom:16px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;">Songwriter · Producer · BIMM Institute</p>
+        <p style="font-size:.875rem;color:var(--text-2);line-height:1.72;">Studied songwriting at BIMM. Works across major-label and independent projects, bringing commercial-level craft and a collaborative, artist-first approach to every song.</p>
+      </div>
+      <div class="card card-pad card-tilt reveal rd1">
+        <div class="chip chip-green" style="margin-bottom:20px;"><div class="chip-dot"></div>Co-founder</div>
+        <h3 style="font-size:1.35rem;margin-bottom:6px;">Jack Buster Weston</h3>
+        <p style="font-size:.78rem;color:var(--text-3);margin-bottom:16px;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;">Producer · Engineer · BIMM Institute</p>
+        <p style="font-size:.875rem;color:var(--text-2);line-height:1.72;">Met Archie at BIMM. Deep production and engineering expertise spanning multiple genres, with a track record that includes work on major-label releases and independent projects.</p>
+      </div>
+    </div>
+    <!-- Credibility strip -->
+    <div style="border-radius:var(--r-xl);border:1px solid var(--border);background:var(--surface-2);padding:40px 44px;" class="reveal rd2">
+      <p class="strip-label" style="margin-bottom:28px;">Between us, we've worked with</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;margin-bottom:36px;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:rgba(241,245,249,.45);">Universal Music</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:rgba(241,245,249,.45);">Sony Music</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:rgba(241,245,249,.45);">BMG</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;color:rgba(241,245,249,.45);">Warner Music</span>
+      </div>
+      <div style="height:1px;background:var(--border);margin-bottom:36px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center;">
+        <div>
+          <div class="stat-num" style="font-size:clamp(1.5rem,3vw,2rem);" data-count="10" data-suffix="M+">10M+</div>
+          <div class="stat-lbl">Combined streams</div>
+        </div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;color:var(--primary-light);line-height:1.2;margin-bottom:6px;">Paul McCartney</div>
+          <div class="stat-lbl">Personally recognised for songwriting</div>
+        </div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;color:#34D399;line-height:1.2;margin-bottom:6px;">Dave Stewart</div>
+          <div class="stat-lbl">Worked with the Eurythmics legend</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ARTIST PHOTO QUOTE -->
 <section class="section section-dark" aria-labelledby="story-h">
@@ -467,10 +530,10 @@
   <p>Tell us where you're at. No pressure — just a starting point.</p>
   <form onsubmit="handleSubmit(event)" novalidate>
     <div class="form-group">
-      <div class="form-label" id="path-lbl">Where are you starting from? <abbr title="required" aria-hidden="true">*</abbr></div>
+      <div class="form-label" id="path-lbl">What are you looking for? <abbr title="required" aria-hidden="true">*</abbr></div>
       <div class="path-options" role="group" aria-labelledby="path-lbl">
-        <div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'demo')" onkeydown="if(event.key==='Enter'||event.key===' ')selectPath(this,'demo')" aria-pressed="false"><div class="path-option-icon">🎧</div><div class="path-option-label">I have a demo</div></div>
-        <div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'idea')" onkeydown="if(event.key==='Enter'||event.key===' ')selectPath(this,'idea')" aria-pressed="false"><div class="path-option-icon">✍️</div><div class="path-option-label">I need help writing too</div></div>
+        <div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'prosong')" onkeydown="if(event.key==='Enter'||event.key===' ')selectPath(this,'prosong')" aria-pressed="false"><div class="path-option-icon">🎵</div><div class="path-option-label">ProSong — 1 song</div></div>
+        <div class="path-option" role="button" tabindex="0" onclick="selectPath(this,'program')" onkeydown="if(event.key==='Enter'||event.key===' ')selectPath(this,'program')" aria-pressed="false"><div class="path-option-icon">🎓</div><div class="path-option-label">Complete Songwriter</div></div>
       </div>
     </div>
     <div class="form-group"><label class="form-label" for="f-name">Your name <abbr title="required" aria-hidden="true">*</abbr></label><input class="form-input" id="f-name" type="text" placeholder="What should we call you?" autocomplete="given-name" required minlength="2"></div>

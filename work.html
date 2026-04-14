@@ -44,6 +44,8 @@
   </style>
 </head>
 <body>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
 <a href="#main" class="skip-link">Skip to main content</a>
 <div id="progress-bar"></div>
 <nav aria-label="Main navigation">
@@ -89,7 +91,21 @@
       <div class="track-card reveal rd1" data-genre="r&b"><div class="t-genre">R&amp;B Soul · Mix + Master</div><div class="t-name">4AM</div><div class="wave-bars" aria-hidden="true"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><div class="t-footer"><button class="play-btn" aria-label="Play 4AM"><svg viewBox="0 0 14 14"><polygon points="3,1 13,7 3,13"/></svg></button><span class="t-tag">Demo → Spotify</span></div></div>
     </div>
 
-    <div style="margin-top:56px;padding:40px;border-radius:var(--r-xl);border:1px solid var(--border);background:var(--surface);text-align:center;" class="reveal">
+    <!-- Spotify CTA -->
+    <div style="margin-top:40px;padding:36px 40px;border-radius:var(--r-xl);border:1px solid rgba(30,215,96,.2);background:linear-gradient(135deg,rgba(30,215,96,.05),rgba(7,7,15,0) 60%);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;" class="reveal">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#1DB954;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg viewBox="0 0 24 24" fill="white" width="22" height="22" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        </div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;margin-bottom:2px;">Hear our work on Spotify</div>
+          <div style="font-size:.78rem;color:var(--text-3);">10M+ combined streams across our catalogue</div>
+        </div>
+      </div>
+      <a href="https://open.spotify.com/playlist/1TzrniJVIYWgntzyzXVlBb" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="border-color:rgba(30,215,96,.3);color:#1DB954;">Open Playlist →</a>
+    </div>
+
+    <div style="margin-top:16px;padding:40px;border-radius:var(--r-xl);border:1px solid var(--border);background:var(--surface);text-align:center;" class="reveal">
       <div class="eyebrow" style="margin-bottom:12px;">Your track next?</div>
       <h3 style="font-size:1.5rem;margin-bottom:12px;">Ready to hear what we'd do with your song?</h3>
       <p style="font-size:.9rem;color:var(--text-2);max-width:440px;margin:0 auto 28px;">Send us your idea — voice note, demo, or just a description — and we'll have a first draft back within 48 hours.</p>

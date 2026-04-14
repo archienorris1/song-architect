@@ -44,6 +44,8 @@
   </style>
 </head>
 <body>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
 <a href="#main" class="skip-link">Skip to main content</a>
 <div id="progress-bar"></div>
 <nav aria-label="Main navigation">
@@ -58,8 +60,8 @@
   <div class="mesh-blob blob-2" style="position:absolute;opacity:.2;" aria-hidden="true"></div>
   <div style="position:relative;z-index:2;max-width:640px;margin:0 auto;">
     <div class="eyebrow reveal">Get started</div>
-    <h1 style="font-size:clamp(2.4rem,5vw,4rem);margin-bottom:16px;" class="reveal rd1">Start Your Song</h1>
-    <p style="font-size:1rem;color:var(--text-2);line-height:1.7;max-width:460px;margin:0 auto;" class="reveal rd2">Tell us where you're starting from. No demo required — a description is enough. First draft back within 48 hours.</p>
+    <h1 style="font-size:clamp(2.4rem,5vw,4rem);margin-bottom:16px;" class="reveal rd1">Let's Build Your Song.</h1>
+    <p style="font-size:1rem;color:var(--text-2);line-height:1.7;max-width:480px;margin:0 auto;" class="reveal rd2">Tell us what you're working on — whether you want one song done professionally or to join the Complete Songwriter program. We reply within a few hours.</p>
   </div>
 </section>
 
@@ -75,11 +77,11 @@
           <div class="form-group">
             <div class="form-label" id="path-l">Where are you starting from?</div>
             <div class="path-toggle" role="group" aria-labelledby="path-l">
-              <div class="ptog" role="button" tabindex="0" onclick="togPath(this,'demo')" onkeydown="if(event.key==='Enter')togPath(this,'demo')" aria-pressed="false">
-                <div class="ptog-icon">🎧</div><div class="ptog-label">I have a demo</div>
+              <div class="ptog" role="button" tabindex="0" onclick="togPath(this,'prosong')" onkeydown="if(event.key==='Enter')togPath(this,'prosong')" aria-pressed="false">
+                <div class="ptog-icon">🎵</div><div class="ptog-label">ProSong (1 song)</div>
               </div>
-              <div class="ptog" role="button" tabindex="0" onclick="togPath(this,'idea')" onkeydown="if(event.key==='Enter')togPath(this,'idea')" aria-pressed="false">
-                <div class="ptog-icon">✍️</div><div class="ptog-label">Just an idea</div>
+              <div class="ptog" role="button" tabindex="0" onclick="togPath(this,'program')" onkeydown="if(event.key==='Enter')togPath(this,'program')" aria-pressed="false">
+                <div class="ptog-icon">🎓</div><div class="ptog-label">Complete Songwriter (3 months)</div>
               </div>
             </div>
           </div>

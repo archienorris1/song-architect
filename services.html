@@ -49,6 +49,8 @@
   </style>
 </head>
 <body>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
 <a href="#main" class="skip-link">Skip to main content</a>
 <div id="progress-bar"></div>
 <nav aria-label="Main navigation">
@@ -62,10 +64,12 @@
   <div class="path-hero-overlay" aria-hidden="true"></div>
   <div class="mesh-blob blob-1" style="position:absolute;" aria-hidden="true"></div>
   <div class="mesh-blob blob-2" style="position:absolute;" aria-hidden="true"></div>
+  <div class="mesh-blob blob-3" style="position:absolute;" aria-hidden="true"></div>
+  <div class="mesh-blob blob-4" style="position:absolute;" aria-hidden="true"></div>
   <div style="position:relative;z-index:2;max-width:680px;margin:0 auto;">
     <div class="eyebrow reveal">Services</div>
-    <h1 style="font-size:clamp(2.4rem,5vw,4rem);margin-bottom:20px;" class="reveal rd1">Two paths.<br><span class="gradient-text">One destination.</span></h1>
-    <p style="font-size:1rem;color:var(--text-2);line-height:1.7;max-width:500px;margin:0 auto;" class="reveal rd2">Whether you have a rough demo or just a concept, we take it to a professionally released track. Choose the path that fits where you are.</p>
+    <h1 style="font-size:clamp(2.4rem,5vw,4rem);margin-bottom:20px;" class="reveal rd1">Two offers.<br><span class="gradient-text">One mission.</span></h1>
+    <p style="font-size:1rem;color:var(--text-2);line-height:1.7;max-width:500px;margin:0 auto;" class="reveal rd2">One song done for you at a professional level, or three songs built with you while you learn the craft. Choose the offer that fits where you are.</p>
   </div>
 </section>
 
@@ -74,33 +78,50 @@
     <div class="path-detail">
       <div class="path-block pa card-tilt reveal">
         <span class="path-num" aria-hidden="true">A</span>
-        <div class="chip chip-indigo" style="margin-bottom:20px;"><div class="chip-dot"></div>Path A</div>
-        <h2 style="font-size:1.6rem;margin-bottom:8px;" id="services-h">Production + Mix + Master</h2>
-        <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:8px;"><strong style="color:var(--text);">Best for:</strong> You have a song — lyrics, melody, maybe a demo — but it doesn't sound professional yet.</p>
+        <div class="chip chip-indigo" style="margin-bottom:20px;"><div class="chip-dot"></div>ProSong</div>
+        <h2 style="font-size:1.6rem;margin-bottom:8px;" id="services-h">Your Song. Professionally Built &amp; Finished.</h2>
+        <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:8px;"><strong style="color:var(--text);">Best for:</strong> Artists who want one finished, release-ready song. You bring the idea — we handle everything else.</p>
         <div class="include-list">
-          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Full Production</div><p class="inc-desc">Drums, bass, melodic elements, arrangement — we build a complete backing track around your idea.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Full Custom Production</div><p class="inc-desc">Built around your style — drums, bass, melodic elements, full arrangement from your voice note or demo.</p></div></div>
           <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="6" width="10" height="6" rx="1.5" stroke-width="1.5"/><path d="M6 6V4a2 2 0 0 1 4 0v2" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Professional Mixing</div><p class="inc-desc">Every element balanced and processed to sound cohesive, wide, and polished.</p></div></div>
           <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Mastering</div><p class="inc-desc">Loudness, EQ, limiting — optimised for Spotify, Apple Music, YouTube, and everywhere else.</p></div></div>
-          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-8" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Unlimited Revisions</div><p class="inc-desc">We revise until the song feels exactly right to you. No revision cap, no extra fees.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-8" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Unlimited Revisions</div><p class="inc-desc">We revise until the song is exactly what you imagined. No revision cap, no extra fees.</p></div></div>
         </div>
         <div class="divider-v"></div>
-        <div class="price-note">Starting from a discussion on your project. We quote after hearing your demo — no hidden fees, no surprises.</div>
-        <div style="margin-top:24px;"><button class="btn-primary" onclick="openModal()">Start with Path A →</button></div>
+        <div style="margin-bottom:20px;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:var(--r-md);border:1px solid var(--border);background:rgba(99,102,241,.05);">
+              <span style="font-size:.875rem;color:var(--text-2);">Production + Mix + Master</span>
+              <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;">£397</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:var(--r-md);border:1px solid rgba(99,102,241,.25);background:rgba(99,102,241,.08);">
+              <span style="font-size:.875rem;color:var(--text-2);">Writing + Production + Mix + Master</span>
+              <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;">£497</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:24px;"><button class="btn-primary" onclick="openModal()">Get ProSong →</button></div>
       </div>
       <div class="path-block pb highlight card-tilt reveal rd2">
         <span class="path-num" aria-hidden="true">B</span>
-        <div class="chip chip-green" style="margin-bottom:20px;"><div class="chip-dot"></div>Path B — Most Popular</div>
-        <h2 style="font-size:1.6rem;margin-bottom:8px;">Writing + Production + Mix + Master</h2>
-        <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:8px;"><strong style="color:var(--text);">Best for:</strong> You have a concept, a hook, or a half-finished idea — but you need help shaping it into a complete song.</p>
+        <div class="chip chip-green" style="margin-bottom:20px;"><div class="chip-dot"></div>Complete Songwriter — 3-Month Program</div>
+        <h2 style="font-size:1.6rem;margin-bottom:8px;">Write, Build &amp; Release 3 Songs in 90 Days</h2>
+        <p style="font-size:.88rem;color:var(--text-2);line-height:1.7;margin-bottom:8px;"><strong style="color:var(--text);">Best for:</strong> Artists who want songs AND skills — beginners who feel overwhelmed, or creators who keep getting stuck finishing tracks.</p>
         <div class="include-list">
-          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12V8l4-6 4 6v4M6 12v-3h4v3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="inc-title">Co-Writing</div><p class="inc-desc">We shape your concept into a full song — lyrics, melody, structure — while protecting your core idea.</p></div></div>
-          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Full Production</div><p class="inc-desc">Complete backing track built around the song we craft together.</p></div></div>
-          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="6" width="10" height="6" rx="1.5" stroke-width="1.5"/><path d="M6 6V4a2 2 0 0 1 4 0v2" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Professional Mixing</div><p class="inc-desc">Full mix ensuring every element sits perfectly in the soundscape.</p></div></div>
-          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Mastering</div><p class="inc-desc">Platform-optimised master, ready to distribute anywhere immediately.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2zm0 3v3l2.5 2.5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Weekly 60-Minute Sessions</div><p class="inc-desc">Structured, hands-on collaboration every week for 3 months. You're involved in the full process — not just watching.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M4 12V8l4-6 4 6v4M6 12v-3h4v3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="inc-title">Core Fundamentals</div><p class="inc-desc">Songwriting, production, workflow — learn by doing, with weekly homework to build real, lasting skills.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">3 Fully Finished Songs</div><p class="inc-desc">We actively work on your songs between sessions — you get updates and breakdowns of every decision.</p></div></div>
+          <div class="include-item"><div class="inc-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-8" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="inc-title">Confidence &amp; Independence</div><p class="inc-desc">You leave with 3 release-ready songs, a repeatable creative process, and the ability to keep making music on your own.</p></div></div>
         </div>
         <div class="divider-v"></div>
-        <div class="price-note">We build around your idea — you keep 100% creative ownership and all rights to your song.</div>
-        <div style="margin-top:24px;"><button class="btn-cta" onclick="openModal()">Start with Path B →</button></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:var(--r-md);border:1px solid rgba(16,185,129,.25);background:rgba(16,185,129,.06);margin-bottom:20px;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#34D399;letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;">3-Month Investment</div>
+            <div style="font-size:.78rem;color:var(--text-3);">3 songs + skills + confidence</div>
+          </div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;">£1,500</span>
+        </div>
+        <div style="margin-top:24px;"><button class="btn-cta" onclick="openModal()">Join the Program →</button></div>
       </div>
     </div>
 
@@ -108,16 +129,19 @@
     <h3 style="font-size:1.5rem;margin:72px 0 0;text-align:center;" class="reveal">Side-by-side comparison</h3>
     <div class="divider" style="margin:24px 0 0;"></div>
     <table class="compare-table reveal rd1" aria-label="Services comparison">
-      <thead><tr><th>What's included</th><th>Path A — Production</th><th>Path B — Full Service</th></tr></thead>
+      <thead><tr><th>What's included</th><th>ProSong — £397 / £497</th><th>Complete Songwriter — £1,500</th></tr></thead>
       <tbody>
-        <tr><td>Co-writing &amp; song development</td><td class="dash-cell">—</td><td class="check-cell">✓</td></tr>
-        <tr><td>Full production from scratch</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
-        <tr><td>Professional mixing</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
-        <tr><td>Mastering (all platforms)</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Number of songs</td><td style="color:var(--text-2);">1 song</td><td style="color:var(--text-2);">3 songs</td></tr>
+        <tr><td>Full custom production</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Professional mixing &amp; mastering</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Co-writing support</td><td style="color:var(--text-3);">Optional (+£100)</td><td class="check-cell">✓</td></tr>
         <tr><td>Unlimited revisions</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
         <tr><td>100% artist ownership</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
-        <tr><td>Release-ready delivery files</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
-        <tr><td>48-hour first draft</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Release-ready final files</td><td class="check-cell">✓</td><td class="check-cell">✓</td></tr>
+        <tr><td>Weekly 60-min sessions</td><td class="dash-cell">—</td><td class="check-cell">✓</td></tr>
+        <tr><td>Structured learning &amp; homework</td><td class="dash-cell">—</td><td class="check-cell">✓</td></tr>
+        <tr><td>Repeatable creative process</td><td class="dash-cell">—</td><td class="check-cell">✓</td></tr>
+        <tr><td>Duration</td><td style="color:var(--text-2);">7–14 days per song</td><td style="color:var(--text-2);">3 months</td></tr>
       </tbody>
     </table>
   </div>
@@ -128,11 +152,12 @@
     <div class="eyebrow reveal">FAQ</div>
     <h2 class="section-heading reveal rd1" id="faq-h">Common questions</h2>
     <div class="faq-list reveal rd2">
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">What do I need to send to get started?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>Anything — a voice note, a rough demo, lyrics in a doc, or even just a description of what you're going for. We work from wherever you are.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">How do revisions work?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>There's no revision cap. You give feedback, we revise. We keep going until the song feels exactly right to you — that's the whole point.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">Do I own my song?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>Yes, 100%. You retain full creative and commercial ownership. We don't take publishing cuts or royalty shares. It's your song.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">How long does the full process take?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>You'll have a first draft within 48 hours. The full process — including revisions and mastering — typically takes 7–14 days depending on the number of revision rounds.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">What formats do I get at the end?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>WAV (24-bit master), MP3 (320kbps), and any streaming-specific formats you need. Everything you need to distribute immediately.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">Which offer is right for me — ProSong or Complete Songwriter?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>If you want one song finished to a professional standard with minimal effort on your part, ProSong is the answer. If you want to finish multiple songs AND build lasting skills so you can create independently, Complete Songwriter is the program for you.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">What do I need to send to get started?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>Anything — a voice note, a rough demo, lyrics in a doc, or even just a description of what you're going for. We work from wherever you are. A voice note on your phone is genuinely enough.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">How do revisions work?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>There's no revision cap on either offer. You give feedback, we revise. We keep going until every song feels exactly right to you — that's the whole point.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">Do I own my songs?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>Yes, 100% on both offers. You retain full creative and commercial ownership of every song we work on together. We don't take publishing cuts or royalty shares. Your songs are yours.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">What experience do I need for the Complete Songwriter program?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>None. The program is specifically designed for beginners who feel overwhelmed, artists stuck finishing tracks, and creators who want long-term independence. If you have musical ideas in your head, that's enough to start.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)" tabindex="0" onkeydown="if(event.key==='Enter')toggleFaq(this)" aria-expanded="false">What formats do I receive at the end?<svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="faq-a"><p>WAV (24-bit master), MP3 (320kbps), and loudness-normalised files for Spotify, Apple Music, and YouTube. Everything you need to distribute immediately.</p></div></div>
     </div>
     <div style="margin-top:48px;text-align:center;"><button class="btn-cta" onclick="openModal()" style="font-size:1.05rem;padding:16px 40px;">Start Your Song →</button></div>
   </div>
