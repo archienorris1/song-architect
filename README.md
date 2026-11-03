@@ -4,6 +4,14 @@ Song Architect is an artist-founded marketplace concept from Archie and Jack. Ar
 
 [Private interactive prototype](https://song-architect-studio-concept.archienorris.chatgpt.site)
 
+## Production and DNS
+
+The marketplace prototype is deployed on the Vercel project `song-architect-site`. [Open the production site](https://songarchitect.co.uk).
+
+Squarespace manages the DNS. The apex A record points to `76.76.21.21`. The `www` CNAME points to `3699ca4b8b8a2a29.vercel-dns-017.com`. Vercel sends a permanent 308 redirect from `www` to the apex. Both records replace the former Shopify routing.
+
+Source for this release is on the [marketplace-prototype branch](https://github.com/archienorris1/song-architect/tree/marketplace-prototype). The proposed `.studio` move is a separate launch step.
+
 ## What to try
 
 - [What do I need?](https://song-architect-studio-concept.archienorris.chatgpt.site/#guide) suggests a service and carries the artist's answer into a draft brief.
