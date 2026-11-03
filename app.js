@@ -58,8 +58,39 @@ function artistHome() {
       </div>
       <iframe title="Song Architect work playlist on Spotify" src="https://open.spotify.com/embed/playlist/1TzrniJVIYWgntzyzXVlBb" width="100%" height="352" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
     </section>
+    ${artistProof()}
     <section class="home-workspace"><div><div class="eyebrow orange">The workspace</div><h2>Your song, all in one place.</h2><p>Find messages, audio versions and release plans together.</p></div><button class="button outline small" data-action="workspace">Explore a demo release</button></section>
   </div>`;
+}
+
+const releaseCredits = [
+  ['Dina Rebekka', 'Deserve Better', 'Production, mixing and mastering', '347,287'],
+  ['Elisabeth Grey', 'Good Enough', 'Songwriting', '60,214'],
+  ['AliceA', 'Lonely Kid', 'Production, mixing and mastering', '55,616'],
+  ['Scharlina', 'Running', 'Production, mixing and mastering', '33,214'],
+  ['Max Sarre', 'Drunk', 'Songwriting, production, mixing and mastering', '20,410'],
+  ['Max Edwards', 'Deeper Down', 'Songwriting, production, mixing and mastering', '16,652'],
+  ['Jack Buster Weston', 'Bold Move', 'Songwriting', '490,616'],
+  ['Richie Krisak &amp; Archie Norris', 'Happiness Again', 'Songwriting', '239,249']
+];
+
+function artistProof() {
+  return `<section class="artist-proof" aria-labelledby="quotes-title">
+    <div class="eyebrow orange">Artist feedback</div><h2 id="quotes-title">What artists told us.</h2>
+    <div class="proof-quotes">
+      <figure class="journey-card"><blockquote>“i love love love it! it’s so so good, just what i was envisioning”</blockquote><figcaption>Emily Alice</figcaption></figure>
+      <figure class="journey-card"><blockquote>“SOUNDS GREAT!!! exactly what I wanted!!”</blockquote><figcaption>Sophia Bolinder</figcaption></figure>
+      <figure class="journey-card"><blockquote>“the melody ideas are just flowing!! Would love to work on this one!!”</blockquote><figcaption>Aftercoast</figcaption></figure>
+    </div>
+  </section>
+  <section class="artist-proof" aria-labelledby="credits-title">
+    <div class="eyebrow orange">Selected releases</div><h2 id="credits-title">What we contributed.</h2>
+    <p class="note">Stream counts are snapshots from the original Song Architect case studies.</p>
+    <ul class="proof-credits">${releaseCredits.map(([artist, song, credit, streams]) => `<li>
+      <div><strong>${song}</strong><span>${artist}</span></div>
+      <span>${credit}</span><strong>${streams} streams</strong>
+    </li>`).join('')}</ul>
+  </section>`;
 }
 
 function talentPage(){return `<div class="container"><section class="page-title"><div class="eyebrow orange">Invite-led and application only</div><h1>The SA Endorsed roster.</h1><p>The right sound starts with the right connection. Explore writers, producers, session singers, instrumentalists and engineers by genre and craft.</p></section>${rosterIntro()}<p class="workspace-shortcuts"><a class="button outline small" href="#guide">Help me work out what I need</a></p><div class="searchbar"><input id="talent-search" type="search" aria-label="Search talent" placeholder="Search by name, sound or speciality…" value="${esc(search)}"><select id="role-filter" aria-label="Filter by service">${services.map(s=>`<option ${s===role?'selected':''}>${s}</option>`).join('')}</select></div>${filters()}<p class="note" id="result-count" style="margin-bottom:17px">${filtered().length} concept profiles · Prices in GBP · No booking charges in this demo</p><div class="talent-grid" id="directory">${directoryCards()}</div><section class="section"><div class="release-banner"><div><div class="eyebrow">You don’t need to know every job title</div><h2>Tell us what you want to make.</h2><p>Start with your song. We’ll suggest the roles your project needs.</p></div><button class="button light" data-action="start">Find my next step</button></div></section></div>`}

@@ -71,3 +71,18 @@ header{background:#fffaf0}.brand{min-width:186px;letter-spacing:0}.wordmark{posi
 .artist-work .text-btn{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:4px}
 .artist-highlights{display:flex;flex-wrap:wrap;gap:0 16px;margin-top:8px}
 @media(max-width:760px){.artist-work{grid-template-columns:1fr;gap:12px}}
+
+.artist-proof{padding:32px 0;border-bottom:1px solid var(--line)}
+.artist-proof h2{font-size:clamp(24px,3vw,34px);margin:10px 0 16px}
+.proof-quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.proof-quotes figure{margin:0}
+.proof-quotes blockquote{margin:0 0 16px;font:clamp(18px,2vw,23px)/1.4 Georgia,serif}
+.proof-quotes figcaption{font-weight:650}
+.proof-credits{list-style:none;padding:0;margin:16px 0 0}
+.proof-credits li{display:grid;grid-template-columns:1fr 1.2fr auto;gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--line)}
+.proof-credits li div span{display:block}
+@media(max-width:760px){
+  .proof-quotes{grid-template-columns:1fr}
+  .proof-credits li{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+  .proof-credits li>span{grid-column:1/-1;grid-row:2}
+}

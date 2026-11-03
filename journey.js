@@ -71,8 +71,25 @@ function notificationsPage() {
 }
 
 function storyPage() {
-  return `<div class="container journey-page"><section class="page-title"><div class="eyebrow orange">Our story / Archie &amp; Jack</div><h1>It starts with a song.</h1></section>
-    <div class="story-grid"><img src="assets/studio.jpg" alt="Recording studio"><article class="journey-card"><h2>We’re Archie and Jack.</h2><p>Between us, we’ve written, produced and engineered records, and spent a lot of time talking to artists about what gets in the way of finishing a song. One thing kept coming up: people knew how they wanted their music to feel, but weren’t sure who to ask or what to book.</p><p>We’re building Song Architect to make that first step easier. Bring a voice note, a demo or a nearly finished record. We’ll help you work out what it needs and find people we’d trust with our own music.</p><p>Then you can make the record together, with the brief, versions, feedback and payments all in one place. For the people making it with you, that means clear projects, room to do good work and a way to get paid on time.</p><a class="button dark small" href="#guide">Find your next step</a></article></div></div>`;
+  return `<div class="container journey-page">
+    <section class="page-title"><div class="eyebrow orange">Our story / Archie &amp; Jack</div><h1>We started with songs we couldn’t finish.</h1><p>We built Song Architect to give other artists the help we wish we’d had.</p></section>
+    <div class="story-grid">
+      <article class="journey-card"><h2>Where it started</h2>
+        <p>We met studying songwriting at BIMM Brighton. We both dreamed of making records that would top the charts, and we’d talk about songs we were proud of that we couldn’t get past the demo stage. We could hear how they should sound on the radio. We just didn’t know who could help us get them there.</p>
+        <p>So we spent years learning to do it ourselves. We started Song Architect by writing, producing, mixing and mastering songs for other artists. We’re songwriters first, and working alongside friends who live for production and engineering showed us how much the right specialist can bring to a record.</p>
+      </article>
+      <article class="journey-card"><h2>From the artist side</h2>
+        <p>Jack had opportunities with Universal, and Archie had opportunities with Sony, Warner and BMG. Archie started writing songs and busking at nine, producing at 12, and went on to sell out shows at venues including the 100 Club.</p>
+        <p>Archie grew a social following of over 250,000 by sharing covers, often just as the original songs came out. Those covers opened conversations with artists including Felix Jaehn, Jonas Blue, Sabrina Carpenter, Ruel and Bebe Rexha. His songwriting caught Dave Stewart’s attention, and Sir Paul McCartney sent him a personal letter congratulating him on his writing. Archie’s original songs earned over four million streams across platforms in 2020.</p>
+        <p>Along the way, Archie worked with organisations including BMG, MTV, Sony Music Entertainment, Universal Music Publishing Group, the BBC, YouTube, Under Armour and Cosmopolitan.</p>
+      </article>
+    </div>
+    <section class="home-workspace" aria-labelledby="mission-title"><div>
+      <div class="eyebrow orange">Our mission</div><h2 id="mission-title">Make exceptional collaborators easier to find.</h2>
+      <p>We want artists to have access to the writers, producers, musicians and engineers we’d trust with our own songs. Whether you bring a voice note or a nearly finished record, we want to help you find the person who can take it further.</p>
+      <p>There’s nothing like putting a piece of yourself into the world as a song. We want more artists to get to feel that.</p>
+    </div><a class="button dark small" href="#guide">Find your next step</a></section>
+  </div>`;
 }
 
 document.addEventListener('click', event => {
