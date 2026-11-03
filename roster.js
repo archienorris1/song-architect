@@ -16,13 +16,13 @@ function rosterRank(profiles) {
 }
 
 function endorsement() {
-  return '<span class="endorsement">✳ SA Endorsed <small>· demo</small></span>';
+  return '<span class="endorsement">SA Endorsed <small>· demo</small></span>';
 }
 
 function rosterIntro() {
   return `<aside class="roster-callout"><div>${endorsement()}<h3>A roster we would book ourselves.</h3>
     <p>We invite specialists whose work we rate and review applications from others. We check portfolio credits, discuss how they collaborate, and assess delivery on a paid trial before endorsing them.</p></div>
-    <button class="button outline small" data-roster-action="standards">See how we vet ↗</button></aside>`;
+    <button class="button outline small" data-roster-action="standards">See how we vet</button></aside>`;
 }
 
 function bioPage(person) {
@@ -33,8 +33,8 @@ function bioPage(person) {
       <div class="tags">${person.genres.map(sound => `<span>${sound}</span>`).join('')}</div></div>
     <p class="bio-style">${person.style}</p>
     <div class="bio-links">
-      <button class="button dark" data-roster-action="book" data-person="${person.id}">Book me · From ${money(person.rate)} ↗</button>
-      <a class="button outline" href="#talent">Explore the SA roster ↗</a>
+      <button class="button dark" data-roster-action="book" data-person="${person.id}">Book me · From ${money(person.rate)}</button>
+      <a class="button outline" href="#talent">Explore the SA roster</a>
     </div>
     <div class="stage-panel bio-details"><h3>What I can help with</h3><p>${person.roles.join(' · ')}</p>
       <p>Starting at ${money(person.rate)} for ${person.unit}. Confirm the scope, turnaround and revision rounds before booking.</p>
@@ -50,17 +50,17 @@ function promoPage() {
     <div class="roster-tools">
       <article class="stage-panel"><span class="eyebrow orange">01 / Link in bio</span><h3>Your booking page</h3>
       <p>Share a branded profile with your services, starting price and a direct enquiry button.</p><p class="note">Proposed perk: a lower platform fee when you bring the artist through your own link.</p>
-      <div class="roster-buttons"><a class="button dark small" href="#bio-maya">Preview Maya’s page ↗</a>
+      <div class="roster-buttons"><a class="button dark small" href="#bio-maya">Preview Maya’s page</a>
       <button class="button outline small" data-roster-action="copy-bio">Copy demo link</button></div></article>
       <article class="stage-panel"><span class="eyebrow orange">02 / Social assets</span><h3>Announce your endorsement</h3>
       <p>Download a square post graphic and copy a caption you can adapt for Instagram.</p>
-      <div class="promo-art" aria-label="Sample Song Architect announcement graphic">song<br>architect<span>✳ SA Endorsed<br>Maya Ellis / Demo</span></div>
-      <div class="roster-buttons"><button class="button dark small" data-roster-action="download">Download demo graphic ↓</button>
+      <div class="promo-art" aria-label="Sample Song Architect announcement graphic">song<br>architect<span>SA Endorsed<br>Maya Ellis / Demo</span></div>
+      <div class="roster-buttons"><button class="button dark small" data-roster-action="download">Download demo graphic</button>
       <button class="button outline small" data-roster-action="caption">Get the caption</button></div></article>
       <article class="stage-panel"><span class="eyebrow orange">03 / Instagram enquiries</span><h3>Manychat flow template</h3>
       <p>A reusable DM script that gathers a brief before sending the artist to your booking page.</p>
       <ol class="modal-list"><li>Artist comments or messages <strong>RECORD</strong>.</li><li>Ask about their sound, the help they need and their budget.</li><li>Share your booking link so they can send a brief.</li></ol>
-      <button class="button outline small" data-roster-action="flow">Open template ↗</button>
+      <button class="button outline small" data-roster-action="flow">Open template</button>
       <p class="note">Copy and adapt the script in your own Manychat account.</p></article>
     </div></div>`;
 }
@@ -74,19 +74,19 @@ function rewardPage() {
     <h1>Every project can benefit both sides.</h1><p>See what happens when an artist completes another paid song with the same professional. Example rewards and ranking rules are for discussion.</p></section>
     <div class="roster-callout"><div><h3>Maya Ellis and the same artist</h3><p>${completed} of ${rewardMilestone} qualifying songs completed</p>
     <progress max="${rewardMilestone}" value="${completed}" aria-label="Completed songs"></progress></div>
-    <div class="roster-buttons"><button class="button dark small" data-roster-action="complete" ${unlocked ? 'disabled' : ''}>Complete demo booking ✓</button>
+    <div class="roster-buttons"><button class="button dark small" data-roster-action="complete" ${unlocked ? 'disabled' : ''}>Complete demo booking</button>
     <button class="button outline small" data-roster-action="reset-rewards">Reset demo</button></div></div>
     <div class="roster-tools reward-tools">
       <article class="stage-panel"><span class="eyebrow orange">For the artist</span><h3>${unlocked ? creditLabel + ' release credit unlocked' : 'One more song to ' + creditLabel + ' release credit'}</h3>
         <p>After three qualifying paid songs, SA contributes towards the next production, mix, artwork or other eligible release service. The professional receives their agreed payout.</p>
-        <button class="button outline small" data-roster-action="book" data-person="maya">Book Maya again ↗</button></article>
+        <button class="button outline small" data-roster-action="book" data-person="maya">Book Maya again</button></article>
       <article class="stage-panel"><span class="eyebrow orange">For the professional</span><h3>${unlocked ? '10%' : '12%'} fee on the next repeat booking</h3>
         <p>Illustrative fees start at 15% for an SA introduction, fall to 12% for repeat work and reach 10% after three qualifying completed songs with that artist.</p>
         <p>Successful paid projects, verified feedback and repeat clients can improve discovery for relevant briefs.</p></article>
       <article class="stage-panel"><span class="eyebrow orange">Artist search / Ranking preview</span><h3>R&amp;B / Soul songwriting</h3>
-        <ol class="demo-ranking">${matches.map(person => `<li><strong>${person.name}</strong><span>${person.id === 'maya' && unlocked ? '↑ Repeat booking boost' : 'Matched to this brief'}</span></li>`).join('')}</ol>
+        <ol class="demo-ranking">${matches.map(person => `<li><strong>${person.name}</strong><span>${person.id === 'maya' && unlocked ? 'Repeat booking boost' : 'Matched to this brief'}</span></li>`).join('')}</ol>
         <p>Genre and service fit come first. Repeat work is one signal alongside reviews and reliable delivery. Newly endorsed talent still gets discovery space.</p>
-        <button class="button outline small" data-roster-action="matched-roster">View these matches ↗</button></article>
+        <button class="button outline small" data-roster-action="matched-roster">View these matches</button></article>
     </div></div>`;
 }
 
