@@ -31,14 +31,13 @@ header{background:#fffaf0}.brand{min-width:186px;letter-spacing:0}.wordmark{posi
 .focused-hero h1{font-size:clamp(43px,5.6vw,78px);letter-spacing:-.055em}
 .focused-hero .hero-copy p{max-width:440px}
 .focused-hero .hero-actions{flex-wrap:wrap}
-.hero-guide{display:inline-block;margin-top:15px}
+.hero-guide{display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:12px}
+.hero-guide a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:4px}
 .focused-image{min-width:0;aspect-ratio:5/4;overflow:hidden;border-radius:4px;background:var(--blue)}
 .focused-image img{display:block;width:100%;height:100%;object-fit:cover}
-.home-paths{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:32px 0;border-block:1px solid var(--line)}
-.home-paths article{padding:4px 0}
+.home-paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;padding:32px 0;margin:0;list-style:none;border-block:1px solid var(--line)}
 .home-paths h2,.home-workspace h2,.track-note h2{font-size:clamp(24px,3vw,34px);margin:10px 0}
 .home-paths p,.home-workspace p,.track-note p{line-height:1.65;max-width:550px}
-.home-paths .text-btn{display:inline-block;margin-top:10px;color:var(--blue)}
 .home-workspace{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:34px 0 60px}
 .tracks-page{padding-bottom:60px}.track-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .track-cover{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:3/1;background:var(--blue);color:var(--white);padding:20px}
@@ -59,3 +58,16 @@ header{background:#fffaf0}.brand{min-width:186px;letter-spacing:0}.wordmark{posi
 @media (max-width:720px) {
   .release-feedback,.release-visual-grid {grid-template-columns:1fr}
 }
+
+#payout-calculator{scroll-margin-top:110px}
+.audience-toggle button{min-height:44px;font-size:12px}
+.price-line{gap:12px}
+.price-line strong{text-align:right}
+
+.artist-work{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);align-items:start;gap:32px;padding:38px 0;border-bottom:1px solid var(--line)}
+.artist-work h2{font-size:clamp(24px,3vw,34px);margin:10px 0}
+.artist-work p{line-height:1.65}
+.artist-work iframe{display:block;border:0;border-radius:12px}
+.artist-work .text-btn{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:4px}
+.artist-highlights{display:flex;flex-wrap:wrap;gap:0 16px;margin-top:8px}
+@media(max-width:760px){.artist-work{grid-template-columns:1fr;gap:12px}}

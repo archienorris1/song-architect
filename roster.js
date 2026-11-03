@@ -80,8 +80,8 @@ function rewardPage() {
       <article class="stage-panel"><span class="eyebrow orange">For the artist</span><h3>${unlocked ? creditLabel + ' release credit unlocked' : 'One more song to ' + creditLabel + ' release credit'}</h3>
         <p>After three qualifying paid songs, SA contributes towards the next production, mix, artwork or other eligible release service. The professional receives their agreed payout.</p>
         <button class="button outline small" data-roster-action="book" data-person="maya">Book Maya again</button></article>
-      <article class="stage-panel"><span class="eyebrow orange">For the professional</span><h3>${unlocked ? '10%' : '12%'} fee on the next repeat booking</h3>
-        <p>Illustrative fees start at 15% for an SA introduction, fall to 12% for repeat work and reach 10% after three qualifying completed songs with that artist.</p>
+      <article class="stage-panel"><span class="eyebrow orange">For the professional</span><h3>${unlocked ? 'More visibility in the roster' : 'Build visibility with repeat work'}</h3>
+        <p>The example platform fee is ${platformFeePercent}%. Complete three qualifying songs with the same artist to earn a visibility boost.</p>
         <p>Successful paid projects, verified feedback and repeat clients can improve discovery for relevant briefs.</p></article>
       <article class="stage-panel"><span class="eyebrow orange">Artist search / Ranking preview</span><h3>R&amp;B / Soul songwriting</h3>
         <ol class="demo-ranking">${matches.map(person => `<li><strong>${person.name}</strong><span>${person.id === 'maya' && unlocked ? 'Repeat booking boost' : 'Matched to this brief'}</span></li>`).join('')}</ol>
