@@ -86,3 +86,8 @@ header{background:#fffaf0}.brand{min-width:186px;letter-spacing:0}.wordmark{posi
   .proof-credits li{grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
   .proof-credits li>span{grid-column:1/-1;grid-row:2}
 }
+
+.credit-release{display:flex;align-items:center;gap:12px;min-width:0}
+.credit-artwork{position:relative;flex:0 0 56px;aspect-ratio:1;overflow:hidden;border-radius:4px}
+.credit-artwork img{position:absolute;max-width:none;height:auto}
+@media(max-width:760px){.credit-artwork{flex-basis:44px}.credit-release{gap:8px}}

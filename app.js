@@ -64,14 +64,14 @@ function artistHome() {
 }
 
 const releaseCredits = [
-  ['Dina Rebekka', 'Deserve Better', 'Production, mixing and mastering', '347,287'],
-  ['Elisabeth Grey', 'Good Enough', 'Songwriting', '60,214'],
-  ['AliceA', 'Lonely Kid', 'Production, mixing and mastering', '55,616'],
-  ['Scharlina', 'Running', 'Production, mixing and mastering', '33,214'],
-  ['Max Sarre', 'Drunk', 'Songwriting, production, mixing and mastering', '20,410'],
-  ['Max Edwards', 'Deeper Down', 'Songwriting, production, mixing and mastering', '16,652'],
-  ['Jack Buster Weston', 'Bold Move', 'Songwriting', '490,616'],
-  ['Richie Krisak &amp; Archie Norris', 'Happiness Again', 'Songwriting', '239,249']
+  ['Dina Rebekka', 'Deserve Better', 'Production, mixing and mastering', '347,287', ['deserve-better', 200.743, -50.372, -40.335]],
+  ['Elisabeth Grey', 'Good Enough', 'Songwriting', '60,214', ['good-enough', 177.924, -37.891, -34.596]],
+  ['AliceA', 'Lonely Kid', 'Production, mixing and mastering', '55,616', ['lonely-kid', 197.080, -49.453, -39.599]],
+  ['Scharlina', 'Running', 'Production, mixing and mastering', '33,214', ['running', 183.673, -41.327, -35.884]],
+  ['Max Sarre', 'Drunk', 'Songwriting, production, mixing and mastering', '20,410', ['drunk', 197.802, -49.451, -39.744]],
+  ['Max Edwards', 'Deeper Down', 'Songwriting, production, mixing and mastering', '16,652', ['deeper-down', 197.802, -49.634, -39.744]],
+  ['Jack Buster Weston', 'Bold Move', 'Songwriting', '490,616', ['bold-move', 185.249, -41.681, -37.221]],
+  ['Richie Krisak &amp; Archie Norris', 'Happiness Again', 'Songwriting', '239,249', ['happiness-again', 197.802, -49.634, -39.744]]
 ];
 
 function artistProof() {
@@ -86,8 +86,11 @@ function artistProof() {
   <section class="artist-proof" aria-labelledby="credits-title">
     <div class="eyebrow orange">Selected releases</div><h2 id="credits-title">What we contributed.</h2>
     <p class="note">Stream counts are snapshots from the original Song Architect case studies.</p>
-    <ul class="proof-credits">${releaseCredits.map(([artist, song, credit, streams]) => `<li>
-      <div><strong>${song}</strong><span>${artist}</span></div>
+    <ul class="proof-credits">${releaseCredits.map(([artist, song, credit, streams, [artwork, width, left, top]]) => `<li>
+      <div class="credit-release">
+        <span class="credit-artwork"><img src="assets/release-cards/${artwork}.jpg" alt="" loading="lazy" decoding="async" style="width:${width}%;left:${left}%;top:${top}%"></span>
+        <div><strong>${song}</strong><span>${artist}</span></div>
+      </div>
       <span>${credit}</span><strong>${streams} streams</strong>
     </li>`).join('')}</ul>
   </section>`;
