@@ -21,7 +21,7 @@ Source for this release is on the [marketplace-prototype branch](https://github.
 - [Daylight messages](https://song-architect-studio-concept.archienorris.chatgpt.site/#thread) includes two playable versions and timestamped notes. [Pro notification settings](https://song-architect-studio-concept.archienorris.chatgpt.site/#notifications) shows working hours, project mute and digest preferences.
 - [Our Story](https://song-architect-studio-concept.archienorris.chatgpt.site/#story) introduces Archie and Jack and why they are building SA.
 
-The guide uses scripted responses. Demo messages, preferences and reward progress are stored in the current browser. Profiles, prices and examples are illustrative. Booking, payments, AI, user accounts, shared messaging and notification delivery are future integrations.
+The guide uses scripted responses. Demo messages, preferences and reward progress are stored in the current browser. Profiles, prices and examples are illustrative. Payments, AI responses and notification delivery remain future integrations. Shared accounts, projects and professional profile setup are connected to Supabase as described below.
 
 ## Local preview
 
@@ -46,3 +46,13 @@ Project access is enforced by RLS and database triggers, independently of the ma
 Use npm ci and npm run build to bundle the pinned Supabase client. Serve the repository root to preview the website. SQL definitions are in database/marketplace.sql. The transactional marketplace-check.sql exercises the handoff and access restrictions and rolls its test records back. Backend configuration contains only a publishable key.
 
 The existing local booking demo remains separate from shared projects. Professionals can upload WAV, MP3, M4A, AAC, FLAC or OGG files up to 50 MB. Uploads use resumable chunks with progress and automatic retry. Files live in the private sa-project-audio bucket, and participant-only temporary URLs enable audio playback and seeking. Direct HTTPS audio links remain available as a secondary option. The audio-uploads.sql and audio-policy-fix.sql changes extend the original schema. Project invitations are shared through their link rather than email notifications.
+
+## Professional profile setup
+
+Open https://songarchitect.co.uk/#my-profile after signing in. Three sections collect a professional introduction and up to four favourite genres, a main service with GBP price and scope, delivery time, included revision rounds and extra hourly rate, then up to four work examples with contribution credits. Work can use supported release links or resumable audio uploads up to 50 MB. The payout estimate uses the current 10% platform fee.
+
+Professionals can save an incomplete draft, preview privately and submit a completed profile for SA review. Drafts and unpublished samples are owner-only. Publication currently requires an SA administrator to copy the reviewed draft to sa_pro_public_profiles through Supabase. A listed snapshot remains unchanged while the owner edits a new draft. Setting is_listed to false withdraws the profile and its public sample access. No professional can approve their own listing.
+
+Approved profiles appear in the roster and have a shareable #pro-UUID page. Artists can request a quote without knowing the professional's email. The server resolves the approved professional and snapshots the reviewed package terms into the project. The quote form starts with the listed price, scope and revision terms. Google sign-in returns artists to their selected professional.
+
+Schema additions are database/pro-profiles.sql, pro-profile-visibility.sql and pro-profile-package-snapshot.sql. Run pro-profile-check.sql for a transactional regression check covering draft privacy, publication permissions, reviewed snapshots, quote request retries and withdrawn listings. It rolls back its synthetic records.

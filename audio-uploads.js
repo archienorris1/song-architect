@@ -78,7 +78,14 @@ function bindAudioDelivery(form) {
   };
 }
 
-function resumableAudioUpload(file, path, type, token, owner) {
+function resumableAudioUpload(
+  file,
+  path,
+  type,
+  token,
+  owner,
+  bucket = projectAudioBucket,
+) {
   return new Promise((resolve, reject) => {
     const storageOrigin = SA_BACKEND.url.replace(
       ".supabase.co",
@@ -88,7 +95,7 @@ function resumableAudioUpload(file, path, type, token, owner) {
       endpoint: storageOrigin + "/storage/v1/upload/resumable",
       headers: { authorization: "Bearer " + token, apikey: SA_BACKEND.key },
       metadata: {
-        bucketName: projectAudioBucket,
+        bucketName: bucket,
         objectName: path,
         contentType: type,
         cacheControl: "3600",
@@ -98,14 +105,16 @@ function resumableAudioUpload(file, path, type, token, owner) {
       removeFingerprintOnSuccess: true,
       retryDelays: [0, 1000, 3000, 5000, 10000],
       fingerprint: async () =>
-        ["sa-audio", owner, path, file.size, file.lastModified].join(":"),
+        ["sa-audio", bucket, owner, path, file.size, file.lastModified].join(
+          ":",
+        ),
       onProgress: (sent, total) => {
         const percent = total ? Math.floor((sent / total) * 100) : 0;
         $("#audio-upload-progress").value = percent;
         $("#audio-upload-status").textContent =
           percent < 100
             ? "Uploading " + percent + "% · Keep this page open."
-            : "Upload complete. Sharing with the artist…";
+            : "Upload complete. Saving your audio…";
       },
       onError: (error) => {
         const status = error.originalResponse?.getStatus();

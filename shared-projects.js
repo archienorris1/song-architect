@@ -102,7 +102,7 @@ function sharedIndex() {
     return '<div class="container booking-page"><p role="status">Checking your sign-in…</p></div>';
   if (!sharedUser) return accountPage();
   return `<div class="container booking-page"><section class="page-title"><div class="eyebrow orange">Your workspace</div><h1>Your songs.</h1><p>Signed in as ${esc(sharedUser.email)}</p></section>
-    <div class="journey-actions"><button class="button dark" data-shared="new">Start a project</button><button class="button outline small" data-shared="refresh">Refresh</button><a class="text-btn" href="#account">Your account</a></div>
+    <div class="journey-actions"><button class="button dark" data-shared="new">Start a project</button><button class="button outline small" data-shared="refresh">Refresh</button><a class="text-btn" href="#my-profile">My pro profile</a><a class="text-btn" href="#account">Your account</a></div>
     ${sharedError ? `<p role="alert">${esc(sharedError)}</p>` : ""}
     ${sharedLoading ? '<p role="status">Loading your projects…</p>' : `<div class="booking-project-list">${sharedProjects.map((project) => `<a class="journey-card project-link" href="#shared-project-${project.id}"><span><strong>${esc(project.name)}</strong><small>${isProjectPro(project) ? "You’re the professional" : "Artist · with " + esc(project.pro_email)}</small></span><span class="pill">${statusLabel(project)}</span></a>`).join("") || '<section class="journey-card"><h2>Your next song starts here.</h2><p>Create a brief and invite your professional by email. If you’ve been invited, sign in with that same email to see the project here.</p></section>'}</div>`}
     <p class="note">Projects are visible only to the artist and invited professional. Changes refresh automatically while you’re in the workspace.</p></div>`;
@@ -111,14 +111,18 @@ function sharedBrief(person) {
   if (!sharedUser) {
     accountMode = "signin";
     accountNotice = "Sign in or create an account to share your brief.";
+    if (person?.profileId) {
+      sessionStorage.setItem("sa-after-auth", "pro-" + person.profileId);
+      sessionStorage.setItem("sa-profile-quote", person.profileId);
+    }
     go("account");
     return;
   }
   openModal(`<div class="eyebrow orange">New project</div><h2>Tell us about your song.</h2>
-    <p class="modal-intro">Invite the professional you want to work with using their sign-in email.${person ? " You came from " + esc(person.name) + "’s illustrative profile. Choose your actual collaborator below." : ""}</p>
+    <p class="modal-intro">${person?.profileId ? "Request a quote from " + esc(person.name) + "." : "Invite the professional you want to work with using their sign-in email."}${person && !person.profileId ? " You came from " + esc(person.name) + "’s illustrative profile. Choose your actual collaborator below." : ""}</p>
     <form id="shared-brief-form" class="form-grid">
       <label class="full">Project name<input name="name" required maxlength="100"></label>
-      <label class="full">Professional’s email<input name="pro_email" type="email" required maxlength="254" placeholder="Your collaborator’s sign-in email"></label>
+      ${person?.profileId ? '<input type="hidden" name="professional_id" value="' + person.profileId + '">' : '<label class="full">Professional’s email<input name="pro_email" type="email" required maxlength="254" placeholder="Your collaborator’s sign-in email"></label>'}
       <label>Your sound<select name="genre">${genres
         .slice(1)
         .map((genre) => `<option>${genre}</option>`)
@@ -128,19 +132,30 @@ function sharedBrief(person) {
       <label class="full">Reference link (optional)<input type="url" name="reference" placeholder="https://"></label>
       <label>Budget<select name="budget"><option>Help me scope it</option><option>Under £500</option><option>£500–£1,500</option><option>£1,500–£3,000</option><option>£3,000+</option></select></label>
       <label>Preferred completion (optional)<input name="date" type="date" min="${todayDate()}"></label>
-      <p class="note full">Your collaborator will see this project when they sign in with the email above. Share the project link with them. Email notifications are coming later.</p>
+      <p class="note full">${person?.profileId ? "This brief goes to " + esc(person.name) + " in their workspace." : "Your collaborator will see this project when they sign in with the email above. Share the project link with them."}</p>
       <p class="note full" id="shared-form-error" role="alert"></p><button class="button dark full">Share brief</button>
     </form>`);
 }
 function quoteShared(project) {
-  const q = project.quote || {
-    price: 650,
-    scope: "",
-    date: "",
-    revisions: 2,
-    hourly: 50,
-    rights: "",
-  };
+  const selectedPackage = project.brief.package;
+  const q = project.quote ||
+    (selectedPackage
+      ? {
+          price: selectedPackage.price,
+          scope: selectedPackage.scope,
+          date: "",
+          revisions: selectedPackage.revisions,
+          hourly: selectedPackage.hourly,
+          rights: "",
+        }
+      : null) || {
+      price: 650,
+      scope: "",
+      date: "",
+      revisions: 2,
+      hourly: 50,
+      rights: "",
+    };
   openModal(`<div class="eyebrow orange">Quote / ${esc(project.name)}</div><h2>Make the offer clear.</h2><form id="shared-quote-form" data-project-version="${project.row_version}" class="form-grid">
     <label class="full">What you’ll deliver<textarea name="scope" required maxlength="2000">${esc(q.scope)}</textarea></label>
     <label>Total price in GBP<input name="price" type="number" min="25" max="50000" step="0.01" required value="${q.price}"></label>
@@ -257,13 +272,26 @@ document.addEventListener("submit", (event) => {
   sharedFormAction(form, async () => {
     if (form.id === "shared-brief-form") {
       if (
-        values.pro_email.trim().toLowerCase() === sharedUser.email.toLowerCase()
+        values.pro_email?.trim().toLowerCase() ===
+        sharedUser.email.toLowerCase()
       )
         throw new Error(
           "Invite a different email so each collaborator has their own login.",
         );
       const id = form.dataset.requestId || crypto.randomUUID();
       form.dataset.requestId = id;
+      if (values.professional_id) {
+        const { error } = await sharedClient.rpc("sa_request_profile_quote", {
+          p_pro: values.professional_id,
+          p_request: id,
+          p_brief: values,
+        });
+        if (error) throw error;
+        closeModal();
+        go("shared-project-" + id);
+        await loadShared();
+        return;
+      }
       const row = {
         id,
         artist_id: sharedUser.id,
@@ -438,7 +466,9 @@ document.addEventListener("click", (event) => {
   }
 });
 window.addEventListener("hashchange", () => {
-  if (sharedRoute() && sharedUser) loadShared();
+  queueMicrotask(() => {
+    if (sharedRoute() && sharedUser) loadShared();
+  });
 });
 window.addEventListener("focus", () => {
   if (sharedRoute() && sharedUser) loadShared(true);

@@ -24,7 +24,7 @@ function accountPage() {
   if (!sharedReady)
     return '<div class="container booking-page"><p role="status">Checking your sign-in…</p></div>';
   if (sharedUser)
-    return `<div class="container booking-page"><section class="page-title"><div class="eyebrow orange">Your account</div><h1>You’re signed in.</h1><p>${esc(sharedUser.email)}</p></section><div class="journey-actions"><a class="button dark" href="#workspace">Open your projects</a><button class="button outline" data-account="signout">Sign out</button></div></div>`;
+    return `<div class="container booking-page"><section class="page-title"><div class="eyebrow orange">Your account</div><h1>You’re signed in.</h1><p>${esc(sharedUser.email)}</p></section><div class="journey-actions"><a class="button dark" href="#workspace">Open your projects</a><a class="button outline" href="#my-profile">Set up your pro profile</a><button class="button outline" data-account="signout">Sign out</button></div></div>`;
   const signup = accountMode === "signup",
     verify = accountMode === "verify";
   return `<div class="container booking-page account-page"><section class="page-title"><div class="eyebrow orange">Song Architect / Early access</div><h1>${signup ? "Make room for your next song." : verify ? "Check your email." : "Welcome back."}</h1><p>${verify ? "Open the confirmation email, or enter its verification code below." : "Sign in to share briefs, quotes and song versions with your collaborator."}</p></section>
@@ -116,8 +116,9 @@ document.addEventListener("submit", (event) => {
       if (result.data.session) {
         sharedUser = result.data.user;
         accountNotice = "";
-        go("workspace");
+        go(nextAccountRoute());
         await loadShared();
+        if (proProfileRoute()) await loadProProfiles();
       } else {
         accountMode = "signin";
         accountNotice =
@@ -149,13 +150,14 @@ document.addEventListener("submit", (event) => {
         return;
       }
       closeModal();
-      go("workspace");
+      go(nextAccountRoute());
       toast("Password updated.");
     }, form.querySelector("button"));
   }
 });
 
 function clearSharedSession() {
+  resetProProfiles();
   signedAudioCache.clear();
   sharedProjects = [];
   sharedMessages = [];
@@ -168,12 +170,14 @@ async function bootShared() {
   sharedClient.auth.onAuthStateChange((event, session) => {
     // Defer network calls until the Auth callback has released its internal lock.
     setTimeout(async () => {
-      if (sharedUser?.id !== session?.user?.id) clearSharedSession();
+      const identityChanged = sharedUser?.id !== session?.user?.id;
+      const wasReady = sharedReady;
+      if (identityChanged) clearSharedSession();
       sharedUser = session?.user || null;
       sharedReady = true;
       if (returningFromAuth && sharedUser && event !== "PASSWORD_RECOVERY") {
         returningFromAuth = false;
-        go("workspace");
+        go(nextAccountRoute());
       }
       if (event === "PASSWORD_RECOVERY") {
         openModal(
@@ -182,27 +186,48 @@ async function bootShared() {
       }
       if (
         ["account", "workspace", "project"].includes(page) ||
-        page.startsWith("shared-project-")
+        page.startsWith("shared-project-") ||
+        (proProfileRoute() && (identityChanged || !wasReady))
       )
         render();
       if (sharedUser) await loadShared();
+      if (proProfileRoute() && (identityChanged || !wasReady)) {
+        render();
+        await loadProProfiles();
+      }
     }, 0);
   });
   try {
     const { data, error } = await Promise.race([
       sharedClient.auth.getSession(),
-      new Promise((_, reject) => setTimeout(() => reject(new Error("Sign-in connection timed out.")), 10000)),
+      new Promise((_, reject) =>
+        setTimeout(
+          () => reject(new Error("Sign-in connection timed out.")),
+          10000,
+        ),
+      ),
     ]);
     if (error) throw error;
     sharedUser = data.session?.user || null;
   } catch {
-    accountNotice = "Could not connect to sign-in. Check your connection and try again.";
+    accountNotice =
+      "Could not connect to sign-in. Check your connection and try again.";
   }
   sharedReady = true;
   if (
     ["account", "workspace", "project"].includes(page) ||
-    page.startsWith("shared-project-")
+    page.startsWith("shared-project-") ||
+    proProfileRoute()
   )
     render();
   if (sharedUser) await loadShared();
+  if (proProfileRoute()) await loadProProfiles();
+}
+
+function nextAccountRoute() {
+  const next = sessionStorage.getItem("sa-after-auth");
+  sessionStorage.removeItem("sa-after-auth");
+  return next === "my-profile" || /^pro-[0-9a-f-]{36}$/.test(next || "")
+    ? next
+    : "workspace";
 }
