@@ -1,5 +1,6 @@
 let ownProDraft = null;
 let ownProPublished = null;
+let ownProReview = null;
 let publicProProfile = null;
 let approvedPros = [];
 let proPageLoading = false;
@@ -20,6 +21,7 @@ function proProfileRoute() {
 function resetProProfiles() {
   ownProDraft = null;
   ownProPublished = null;
+  ownProReview = null;
   publicProProfile = null;
   proOwner = null;
   proEditorKey = null;
@@ -64,7 +66,7 @@ async function loadProProfiles() {
   if (page !== "talent") render();
   try {
     if (["my-profile", "profile-preview"].includes(route)) {
-      const [draft, published] = await Promise.all([
+      const [draft, published, review] = await Promise.all([
         sharedClient
           .from("sa_pro_profile_drafts")
           .select("*")
@@ -75,18 +77,27 @@ async function loadProProfiles() {
           .select("*")
           .eq("owner_id", owner)
           .maybeSingle(),
+        sharedClient
+          .from("sa_pro_review_notes")
+          .select("*")
+          .eq("owner_id", owner)
+          .maybeSingle(),
       ]);
       if (draft.error) throw draft.error;
       if (published.error) throw published.error;
+      if (review.error) throw review.error;
       if (request !== proRequest || owner !== sharedUser?.id) return;
       ownProDraft = draft.data;
       ownProPublished = published.data;
+      ownProReview = review.data;
       proOwner = owner;
       await prepareProSamples(draft.data?.profile, owner);
     } else if (route === "talent") {
       const { data, error } = await sharedClient
         .from("sa_pro_public_profiles")
         .select("*")
+        .eq("is_listed", true)
+        .order("featured", { ascending: false })
         .order("approved_at", { ascending: false })
         .limit(100);
       if (error) throw error;
@@ -170,7 +181,8 @@ function proSetupPage() {
   proEditorKey = ownProDraft?.row_version || 0;
   return `<div class="container booking-page pro-setup"><section class="page-title"><div class="eyebrow orange">Your professional profile</div><h1>Make it yours.</h1><p>Your sound, your work and a clear starting price.</p></section>
     ${ownProDraft?.review_status === "pending" && JSON.stringify(ownProPublished?.profile) !== JSON.stringify(p) ? '<p class="pro-review-note">Your profile is with SA for review. Saving new changes will create an updated draft.</p>' : ""}
-    ${ownProPublished ? `<p class="pro-review-note">Your public page shows your last approved profile. <a href="#pro-${sharedUser.id}">View public page</a></p>` : ""}
+    ${ownProReview ? `<aside class="pro-review-note"><strong>${{ approved: "Your profile has been approved.", changes_requested: "A note from Song Architect", paused: "Your listing is paused.", restored: "Your listing is live again." }[ownProReview.decision]}</strong>${ownProReview.note ? `<p class="preserve-lines">${esc(ownProReview.note)}</p>` : ""}${ownProReview.decision === "changes_requested" && ownProDraft?.review_status !== "pending" ? "<p>Update your draft and submit it again when you’re ready.</p>" : ""}</aside>` : ""}
+    ${ownProPublished ? (ownProPublished.is_listed ? `<p class="pro-review-note">Your public page shows your last approved profile. <a href="#pro-${sharedUser.id}">View public page</a></p>` : '<p class="pro-review-note">Your approved listing is paused. It is hidden from the roster until SA restores it.</p>') : ""}
     <form id="pro-profile-form">
     <section class="journey-card"><div class="eyebrow orange">01 / About you</div><h2>What’s your sound?</h2>
       <div class="pro-form-grid"><label>Your professional name<input name="name" required maxlength="80" autocomplete="name" value="${esc(p.name)}"></label>
@@ -404,11 +416,14 @@ function proProfilePage(preview = false) {
   const row = preview ? ownProDraft : publicProProfile;
   if (!row)
     return `<div class="container booking-page"><h1>${preview ? "Create your profile first." : "Profile unavailable."}</h1><p>${esc(proPageError || "This profile is being prepared for the roster.")}</p><a class="button dark" href="${preview ? "#my-profile" : "#talent"}">${preview ? "Set up my profile" : "Explore the roster"}</a></div>`;
+  if (!preview && !row.is_listed)
+    return '<div class="container booking-page"><h1>Profile unavailable.</h1><p>This listing is currently paused.</p><a class="button outline" href="#talent">Explore the roster</a></div>';
   return renderProProfile(row, preview);
 }
 function liveRosterContent() {
   return (
     approvedPros
+      .filter((row) => row.is_listed)
       .filter((row) => {
         const p = row.profile;
         return (
@@ -444,7 +459,9 @@ document.addEventListener("submit", (event) => {
   if (button) button.disabled = true;
   saveProForm(form, mode)
     .catch((error) => ($("#pro-profile-error").textContent = error.message))
-    .finally(() => { if (button) button.disabled = false; });
+    .finally(() => {
+      if (button) button.disabled = false;
+    });
 });
 document.addEventListener("change", (event) => {
   const form = event.target.closest("#pro-profile-form");
@@ -533,11 +550,16 @@ window.addEventListener("hashchange", () => {
   });
 });
 
-document.addEventListener('error', event => {
-  if (!event.target.matches?.('audio[data-pro-sample]')) return;
-  if (event.target.parentElement.querySelector('.pro-audio-error')) return;
-  const note = document.createElement('p');
-  note.className = 'note pro-audio-error';
-  note.textContent = 'This sample could not play. Refresh the profile to try again.';
-  event.target.after(note);
-}, true);
+document.addEventListener(
+  "error",
+  (event) => {
+    if (!event.target.matches?.("audio[data-pro-sample]")) return;
+    if (event.target.parentElement.querySelector(".pro-audio-error")) return;
+    const note = document.createElement("p");
+    note.className = "note pro-audio-error";
+    note.textContent =
+      "This sample could not play. Refresh the profile to try again.";
+    event.target.after(note);
+  },
+  true,
+);

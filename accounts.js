@@ -24,7 +24,7 @@ function accountPage() {
   if (!sharedReady)
     return '<div class="container booking-page"><p role="status">Checking your sign-in…</p></div>';
   if (sharedUser)
-    return `<div class="container booking-page"><section class="page-title"><div class="eyebrow orange">Your account</div><h1>You’re signed in.</h1><p>${esc(sharedUser.email)}</p></section><div class="journey-actions"><a class="button dark" href="#workspace">Open your projects</a><a class="button outline" href="#my-profile">Set up your pro profile</a><button class="button outline" data-account="signout">Sign out</button></div></div>`;
+    return `<div class="container booking-page"><section class="page-title"><div class="eyebrow orange">Your account</div><h1>You’re signed in.</h1><p>${esc(sharedUser.email)}</p></section><div class="journey-actions"><a class="button dark" href="#workspace">Open your projects</a><a class="button outline" href="#my-profile">Set up your pro profile</a>${saAdmin ? '<a class="button outline" href="#admin">SA admin</a>' : ""}<button class="button outline" data-account="signout">Sign out</button></div></div>`;
   const signup = accountMode === "signup",
     verify = accountMode === "verify";
   return `<div class="container booking-page account-page"><section class="page-title"><div class="eyebrow orange">Song Architect / Early access</div><h1>${signup ? "Make room for your next song." : verify ? "Check your email." : "Welcome back."}</h1><p>${verify ? "Open the confirmation email, or enter its verification code below." : "Sign in to share briefs, quotes and song versions with your collaborator."}</p></section>
@@ -119,6 +119,7 @@ document.addEventListener("submit", (event) => {
         go(nextAccountRoute());
         await loadShared();
         if (proProfileRoute()) await loadProProfiles();
+        await loadAdminAccess();
       } else {
         accountMode = "signin";
         accountNotice =
@@ -157,6 +158,7 @@ document.addEventListener("submit", (event) => {
 });
 
 function clearSharedSession() {
+  resetAdmin();
   resetProProfiles();
   signedAudioCache.clear();
   sharedProjects = [];
@@ -185,12 +187,13 @@ async function bootShared() {
         );
       }
       if (
-        ["account", "workspace", "project"].includes(page) ||
+        ["account", "workspace", "project", "admin"].includes(page) ||
         page.startsWith("shared-project-") ||
         (proProfileRoute() && (identityChanged || !wasReady))
       )
         render();
-      if (sharedUser) await loadShared();
+      if (sharedUser && sharedRoute()) await loadShared();
+      if (sharedUser && (identityChanged || !wasReady)) await loadAdminAccess();
       if (proProfileRoute() && (identityChanged || !wasReady)) {
         render();
         await loadProProfiles();
@@ -215,19 +218,22 @@ async function bootShared() {
   }
   sharedReady = true;
   if (
-    ["account", "workspace", "project"].includes(page) ||
+    ["account", "workspace", "project", "admin"].includes(page) ||
     page.startsWith("shared-project-") ||
     proProfileRoute()
   )
     render();
-  if (sharedUser) await loadShared();
+  if (sharedUser && sharedRoute()) await loadShared();
   if (proProfileRoute()) await loadProProfiles();
+  if (sharedUser) await loadAdminAccess();
 }
 
 function nextAccountRoute() {
   const next = sessionStorage.getItem("sa-after-auth");
   sessionStorage.removeItem("sa-after-auth");
-  return next === "my-profile" || /^pro-[0-9a-f-]{36}$/.test(next || "")
+  return next === "admin" ||
+    next === "my-profile" ||
+    /^pro-[0-9a-f-]{36}$/.test(next || "")
     ? next
     : "workspace";
 }

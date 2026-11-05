@@ -2,7 +2,7 @@ const rewardMilestone = 3;
 const releaseCredit = 75;
 
 function rosterRoute(route) {
-  return ['home', 'talent', 'workspace', 'standards', 'promo', 'rewards', 'guide', 'thread', 'notifications', 'story', 'tracks', 'release-support', 'song-feedback', 'project', 'release-demo', 'pro-demo', 'account', 'my-profile', 'profile-preview'].includes(route) || /^pro-[0-9a-f-]{36}$/.test(route) || /^shared-project-[0-9a-f-]{36}$/.test(route) ||
+  return ['home', 'talent', 'workspace', 'standards', 'promo', 'rewards', 'guide', 'thread', 'notifications', 'story', 'tracks', 'release-support', 'song-feedback', 'project', 'release-demo', 'pro-demo', 'account', 'my-profile', 'profile-preview', 'admin'].includes(route) || /^pro-[0-9a-f-]{36}$/.test(route) || /^shared-project-[0-9a-f-]{36}$/.test(route) ||
     people.some(person => route === 'bio-' + person.id);
 }
 
