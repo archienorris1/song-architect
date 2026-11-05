@@ -103,8 +103,10 @@ document.addEventListener('click', event => {
     }
     case 'guide-brief':
       startSong();
-      $('#brief-form').elements.start.value = guideChoice.label;
-      $('#brief-form').elements.brief.value = guideNote;
+      const briefFields = ($('#shared-brief-form') || $('#brief-form'))?.elements;
+      if (!briefFields) break;
+      briefFields.start.value = guideChoice.label;
+      briefFields.brief.value = guideNote;
       break;
     case 'guide-matches':
       audience = 'artist';

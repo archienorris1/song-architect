@@ -34,3 +34,15 @@ Run `python3 -m http.server 4173 --directory dist` from the prototype root. Open
 - Explore a funded booking with two professional payout milestones through Stripe Connect. Define review, cancellation and dispute rules. Show Klarna only for eligible orders and verify payment settlement, payout timing and refund behavior.
 - Start with GBP as the quote currency if it simplifies launch. Treat local prices as estimates until local-currency checkout is supported. Confirm the exact charge and currency before payment and show pros their expected payout currency and fees.
 - Confirm SA's role as agent or supplier with a UK VAT adviser before fixing commission or billing flows. Model VAT, payment fees, refunds and rewards separately. A 15% fee on a £100 booking inclusive of 20% VAT leaves £12.50 before other costs if only the fee is taxable.
+
+## Shared accounts and projects
+
+Open https://songarchitect.co.uk/#account and sign in with Google or a confirmed email and password. The existing Song Architect Supabase project hosts the workspace. Email uses the built-in sender, so custom SMTP is needed for general signup delivery.
+
+Create a project as the artist and enter the professional's exact sign-in email. Share the project link with them. The professional sees the brief, sends a quote and adds audio versions. The artist accepts the scope, leaves messages and timestamped notes, requests included revisions and approves delivery. Current testing collects no payments.
+
+Project access is enforced by RLS and database triggers, independently of the marketing audience switch. The project state uses an optimistic row version. Delivery and revision operations commit atomically and accept stable request IDs for safe retries. Automatic refresh runs every six seconds while the workspace is visible.
+
+Use npm ci and npm run build to bundle the pinned Supabase client. Serve the repository root to preview the website. SQL definitions are in database/marketplace.sql. The transactional marketplace-check.sql exercises the handoff and access restrictions and rolls its test records back. Backend configuration contains only a publishable key.
+
+The existing local booking demo remains separate from shared projects. Audio delivery currently accepts a direct HTTPS audio file link, with sample audio available for testing. Project invitations are shared through their link rather than email notifications.

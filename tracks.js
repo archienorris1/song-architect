@@ -41,7 +41,8 @@ document.addEventListener('click', event => {
   if (!event.target.closest('#track-brief')) return;
   const selected = trackPackages[trackPackage];
   startSong(people.find(person => person.id === 'eli'));
-  const fields = $('#brief-form').elements;
+  const fields = ($('#shared-brief-form') || $('#brief-form'))?.elements;
+  if (!fields) return;
   fields.start.value = trackPackage === 'mix' ? 'I need mixing / mastering' : 'A produced track';
   fields.brief.value = 'Track: Daylight. Selected package: ' + selected.name + ' (' + money(selected.price) + ', demo price).';
 });
