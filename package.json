@@ -3,10 +3,11 @@
   "private": true,
   "scripts": {
     "build": "esbuild client/supabase.js --bundle --format=iife --global-name=SAClient --target=es2020 --outfile=vendor/supabase.js --minify",
-    "check": "node --check accounts.js && node --check shared-projects.js && node --check app.js"
+    "check": "node --check audio-uploads.js && node --check accounts.js && node --check shared-projects.js && node --check app.js"
   },
   "dependencies": {
-    "@supabase/supabase-js": "2.119.0"
+    "@supabase/supabase-js": "2.119.0",
+    "tus-js-client": "4.3.1"
   },
   "devDependencies": {
     "esbuild": "0.28.2"

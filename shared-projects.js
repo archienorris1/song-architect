@@ -44,7 +44,12 @@ async function loadShared(quiet = false) {
           .order("created_at"),
       ]);
       for (const result of results) if (result.error) throw result.error;
-      versions = results[0].data;
+      versions = await Promise.all(
+        results[0].data.map(async (version) => ({
+          ...version,
+          audio_url: await audioVersionURL(version, owner),
+        })),
+      );
       messages = results[1].data;
     }
     if (request !== sharedRequest || owner !== sharedUser?.id) return;
@@ -62,7 +67,7 @@ async function loadShared(quiet = false) {
       const audio = $("#shared-audio"),
         position = audio?.currentTime,
         paused = audio?.paused;
-      const source = audio?.getAttribute("src");
+      const sourceVersion = audio?.dataset.versionId;
       const modal = $("#modal").open;
       if (!quiet || !modal) {
         render();
@@ -71,7 +76,7 @@ async function loadShared(quiet = false) {
         const replacement = $("#shared-audio");
         if (
           replacement &&
-          source === replacement.getAttribute("src") &&
+          sourceVersion === replacement.dataset.versionId &&
           position
         ) {
           replacement.addEventListener(
@@ -183,8 +188,8 @@ function sharedProjectPage() {
     ${
       working
         ? `<section class="journey-card"><h2>Listen &amp; leave notes</h2>
-      ${selected ? `<div class="journey-actions">${sharedVersions.map((version) => `<button class="chip" aria-pressed="${selected.id === version.id}" data-shared="version" data-id="${version.id}">${esc(version.name)}</button>`).join("")}</div><audio id="shared-audio" controls preload="metadata" src="${esc(selected.url)}" aria-label="${esc(selected.name)}"></audio><p>${esc(selected.notes)}</p>` : `<p>${pro ? "Add your first version when it’s ready." : "Your professional will add the first version here."}</p>`}
-      ${pro && project.status !== "complete" ? '<button class="button outline small" data-shared="delivery">Add audio version</button>' : ""}
+      ${selected ? `<div class="journey-actions">${sharedVersions.map((version) => `<button class="chip" aria-pressed="${selected.id === version.id}" data-shared="version" data-id="${version.id}">${esc(version.name)}</button>`).join("")}</div>${audioVersionPlayer(selected)}<p>${esc(selected.notes)}</p>` : `<p>${pro ? "Add your first version when it’s ready." : "Your professional will add the first version here."}</p>`}
+      ${pro && project.status !== "complete" ? '<button class="button outline small" data-shared="delivery">Upload audio version</button>' : ""}
       ${project.status === "review" && !pro ? '<div class="journey-actions"><button class="button dark small" data-shared="approve">Approve delivery</button><button class="button outline small" data-shared="revision">Request changes</button></div>' : ""}
       ${project.status === "complete" ? '<p class="pill">Delivery approved</p>' : ""}</section>`
         : ""
@@ -212,9 +217,8 @@ async function updateSharedProject(project, changes) {
     );
 }
 function sharedDeliveryForm(project) {
-  openModal(
-    '<h2>Add an audio version</h2><p class="modal-intro">Use a direct HTTPS audio file link.</p><form id="shared-delivery-form"><label>Version name<input name="name" required maxlength="100"></label><label>Audio file URL<input name="url" type="url" required maxlength="2000" placeholder="https://…/mix.wav"></label><label>What’s changed?<textarea name="notes" required maxlength="2000"></textarea></label><button type="button" class="text-btn" data-shared="sample">Use sample audio for testing</button><p class="note" id="shared-form-error" role="alert"></p><button class="button dark">Share for artist review</button></form>',
-  );
+  openModal(audioDeliveryFields());
+  bindAudioDelivery($("#shared-delivery-form"));
 }
 async function sharedFormAction(form, action) {
   const button = form.querySelector("button:not([type]),button[type=submit]");
@@ -289,19 +293,23 @@ document.addEventListener("submit", (event) => {
       });
       closeModal();
     } else if (form.id === "shared-delivery-form") {
-      if (new URL(values.url).protocol !== "https:")
-        throw new Error("Use a direct HTTPS audio file URL.");
-      const id = form.dataset.requestId || crypto.randomUUID();
-      form.dataset.requestId = id;
-      const { error } = await sharedClient.rpc("sa_market_deliver", {
-        p_id: project.id,
-        p_version: project.row_version,
-        p_delivery_id: id,
-        p_name: values.name.trim(),
-        p_url: values.url,
-        p_notes: values.notes.trim(),
-      });
-      if (error) throw error;
+      if (form.dataset.source !== "link") {
+        await uploadAudioDelivery(form, project, values);
+      } else {
+        if (new URL(values.url).protocol !== "https:")
+          throw new Error("Use a direct HTTPS audio file URL.");
+        const id = form.dataset.requestId || crypto.randomUUID();
+        form.dataset.requestId = id;
+        const { error } = await sharedClient.rpc("sa_market_deliver", {
+          p_id: project.id,
+          p_version: project.row_version,
+          p_delivery_id: id,
+          p_name: values.name.trim(),
+          p_url: values.url,
+          p_notes: values.notes.trim(),
+        });
+        if (error) throw error;
+      }
       closeModal();
     } else if (form.id === "shared-revision-form") {
       const id = form.dataset.requestId || crypto.randomUUID();
@@ -352,6 +360,10 @@ document.addEventListener("click", (event) => {
   switch (button.dataset.shared) {
     case "new":
       sharedBrief();
+      break;
+    case "refresh-audio":
+      signedAudioCache.clear();
+      loadShared();
       break;
     case "refresh":
       loadShared();
@@ -443,7 +455,7 @@ document.addEventListener(
     note.className = "note";
     note.setAttribute("role", "status");
     note.textContent =
-      "This audio could not be played. Ask your collaborator for a direct audio file link.";
+      "This audio could not be played. Refresh the project to renew playback, or ask your collaborator for an MP3 version.";
     event.target.after(note);
   },
   true,

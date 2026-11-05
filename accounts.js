@@ -156,6 +156,7 @@ document.addEventListener("submit", (event) => {
 });
 
 function clearSharedSession() {
+  signedAudioCache.clear();
   sharedProjects = [];
   sharedMessages = [];
   sharedVersions = [];
